@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.0.3.RELEASE'
+}
+
+group 'com.gmail.ivanjermakov1'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+bootRun {
+    systemProperties System.properties
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:2.0.3.RELEASE"
+
+    compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.4'
+}
