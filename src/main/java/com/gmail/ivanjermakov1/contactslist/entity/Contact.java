@@ -1,8 +1,13 @@
 package com.gmail.ivanjermakov1.contactslist.entity;
 
-import java.sql.Date;
+import com.gmail.ivanjermakov1.contactslist.util.db.Insertable;
 
-public class Contact {
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class Contact implements Insertable {
 	
 	private String name;
 	private String surname;
@@ -37,11 +42,6 @@ public class Contact {
 		this.city = city;
 		this.address = address;
 		this.postcode = postcode;
-	}
-	
-	public boolean isValid() {
-		return name != null && !name.isEmpty() &&
-				surname != null && !surname.isEmpty();
 	}
 	
 	public String getName() {
@@ -98,6 +98,36 @@ public class Contact {
 	
 	public Integer getPostcode() {
 		return postcode;
+	}
+	
+	public boolean isValid() {
+		return name != null && !name.isEmpty() &&
+				surname != null && !surname.isEmpty();
+	}
+	
+	@Override
+	public PreparedStatement insert(Connection connection) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement(
+				"insert into " +
+						"contacts(name, surname, patronymic, birth, sex, nationality, marital_status, web_site, email, job_place, country, city, address, postcode) " +
+						"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+		);
+		statement.setString(1, name);
+		statement.setString(2, surname);
+		statement.setString(3, patronymic);
+		statement.setDate(4, birth);
+		statement.setBoolean(5, sex);
+		statement.setString(6, nationality);
+		statement.setString(7, maritalStatus);
+		statement.setString(8, webSite);
+		statement.setString(9, email);
+		statement.setString(10, jobPlace);
+		statement.setString(11, country);
+		statement.setString(12, city);
+		statement.setString(13, address);
+		statement.setInt(14, postcode);
+		
+		return statement;
 	}
 	
 }

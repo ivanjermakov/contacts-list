@@ -1,21 +1,21 @@
 package com.gmail.ivanjermakov1.contactslist.repository;
 
-import com.gmail.ivanjermakov1.contactslist.entity.Contact;
+import com.gmail.ivanjermakov1.contactslist.entity.PhoneNumber;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 @Component
-public class ContactsRepository extends Repository<Contact> {
+public class PhoneNumbersRepository extends Repository<PhoneNumber> {
 	
 	@Override
-	public boolean add(Contact contact) {
+	public boolean add(PhoneNumber phoneNumber) {
 		Connection connection = null;
 		try {
 			connection = super.getConnection();
 			
-			contact.insert(connection).execute();
+			phoneNumber.insert(connection).execute();
 			return true;
 			
 		} catch (SQLException e) {

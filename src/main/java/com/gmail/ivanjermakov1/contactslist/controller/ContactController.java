@@ -1,6 +1,7 @@
 package com.gmail.ivanjermakov1.contactslist.controller;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Contact;
+import com.gmail.ivanjermakov1.contactslist.exception.InvalidContactException;
 import com.gmail.ivanjermakov1.contactslist.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class ContactController {
 	
 	@RequestMapping("add")
 	@PostMapping
-	public void add(@RequestBody Contact contact) {
-		contactService.add(contact);
+	public boolean add(@RequestBody Contact contact) throws InvalidContactException {
+		return contactService.add(contact);
 	}
 	
 }
