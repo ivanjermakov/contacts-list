@@ -4,3 +4,5 @@ gradle
 build
 out
 settings.gradle
+gradlew.bat
+gradlew
