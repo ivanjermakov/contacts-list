@@ -8,10 +8,9 @@ import java.sql.SQLException;
 
 public class PhoneNumber implements Insertable {
 	
-	private String name;
-	private String surname;
-	private Integer area;
-	private Integer operator;
+	private Integer contactId;
+	private Integer areaCode;
+	private Integer operatorCode;
 	private Integer number;
 	private Boolean type;
 	private String comment;
@@ -19,30 +18,25 @@ public class PhoneNumber implements Insertable {
 	public PhoneNumber() {
 	}
 	
-	public PhoneNumber(String name, String surname, Integer area, Integer operator, Integer number, Boolean type, String comment) {
-		this.name = name;
-		this.surname = surname;
-		this.area = area;
-		this.operator = operator;
+	public PhoneNumber(Integer contactId, Integer areaCode, Integer operatorCode, Integer number, Boolean type, String comment) {
+		this.contactId = contactId;
+		this.areaCode = areaCode;
+		this.operatorCode = operatorCode;
 		this.number = number;
 		this.type = type;
 		this.comment = comment;
 	}
 	
-	public String getName() {
-		return name;
+	public Integer getContactId() {
+		return contactId;
 	}
 	
-	public String getSurname() {
-		return surname;
+	public Integer getAreaCode() {
+		return areaCode;
 	}
 	
-	public Integer getArea() {
-		return area;
-	}
-	
-	public Integer getOperator() {
-		return operator;
+	public Integer getOperatorCode() {
+		return operatorCode;
 	}
 	
 	public Integer getNumber() {
@@ -57,11 +51,10 @@ public class PhoneNumber implements Insertable {
 		return comment;
 	}
 	
-	public boolean isValid() {
-		return name != null && !name.isEmpty() &&
-				surname != null && !surname.isEmpty() &&
-				area != null &&
-				operator != null &&
+	public boolean valid() {
+		return contactId != null &&
+				areaCode != null &&
+				operatorCode != null &&
 				number != null &&
 				type != null;
 	}
@@ -70,16 +63,15 @@ public class PhoneNumber implements Insertable {
 	public PreparedStatement insert(Connection connection) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(
 				"insert into " +
-						"phone_numbers(name, surname, area, operator, number, type, comment) " +
-						"values (?, ?, ?, ?, ?, ?, ?)"
+						"phone_number(contact_id, area_code, operator_code, number, type, comment) " +
+						"values (?, ?, ?, ?, ?, ?)"
 		);
-		statement.setString(1, name);
-		statement.setString(2, surname);
-		statement.setInt(3, area);
-		statement.setInt(4, operator);
-		statement.setInt(5, number);
-		statement.setBoolean(6, type);
-		statement.setString(7, comment);
+		statement.setInt(1, contactId);
+		statement.setInt(2, areaCode);
+		statement.setInt(3, operatorCode);
+		statement.setInt(4, number);
+		statement.setBoolean(5, type);
+		statement.setString(6, comment);
 		
 		return statement;
 	}

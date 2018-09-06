@@ -6,6 +6,8 @@ import com.gmail.ivanjermakov1.contactslist.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+
 @RestController
 public class ContactController {
 	
@@ -16,16 +18,16 @@ public class ContactController {
 		this.contactService = contactService;
 	}
 	
-	@RequestMapping("init")
+	@RequestMapping("contact/init")
 	@GetMapping
 	public Contact init() {
 		return new Contact();
 	}
 	
-	@RequestMapping("add")
+	@RequestMapping("contact/add")
 	@PostMapping
-	public boolean add(@RequestBody Contact contact) throws InvalidContactException {
-		return contactService.add(contact);
+	public void add(@RequestBody Contact contact) throws InvalidContactException, SQLException {
+		contactService.add(contact);
 	}
 	
 }
