@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Component
 public class PhoneNumberRepository {
@@ -35,6 +38,35 @@ public class PhoneNumberRepository {
 		statement.setString(6, phoneNumber.getComment());
 		
 		statement.execute();
+	}
+	
+	public Set<PhoneNumber> select(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from phone_number where contact_id = ?"
+		);
+		statement.setInt(1, id);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		return set(resultSet);
+	}
+	
+	private Set<PhoneNumber> set(ResultSet resultSet) throws SQLException {
+		Set<PhoneNumber> set = new LinkedHashSet<>();
+		
+		while (resultSet.next()) {
+			set.add(new PhoneNumber(resultSet.getInt("contact_id"),
+					resultSet.getInt("area_code"),
+					resultSet.getInt("operator_code"),
+					resultSet.getInt("number"),
+					resultSet.getBoolean("type"),
+					resultSet.getString("comment")
+			));
+		}
+		
+		return set;
 	}
 	
 }

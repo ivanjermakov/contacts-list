@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Set;
 
 @Service
 public class AttachmentService {
@@ -25,6 +26,10 @@ public class AttachmentService {
 		
 		attachment.setUploaded(new Date(Calendar.getInstance().getTimeInMillis()));
 		attachmentRepository.insert(attachment);
+	}
+	
+	public Set<Attachment> select(int id) throws SQLException {
+		return attachmentRepository.select(id);
 	}
 	
 }

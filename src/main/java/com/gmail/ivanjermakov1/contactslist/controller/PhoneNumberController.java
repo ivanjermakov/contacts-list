@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 @RestController
 public class PhoneNumberController {
@@ -17,7 +18,6 @@ public class PhoneNumberController {
 	public PhoneNumberController(PhoneNumberService phoneNumberService) {
 		this.phoneNumberService = phoneNumberService;
 	}
-	
 	
 	@RequestMapping("number/init")
 	@GetMapping
@@ -31,5 +31,10 @@ public class PhoneNumberController {
 		phoneNumberService.insert(phoneNumber);
 	}
 	
+	@RequestMapping("number/select")
+	@GetMapping
+	public Set<PhoneNumber> select(@RequestParam("id") int id) throws SQLException {
+		return phoneNumberService.select(id);
+	}
 	
 }

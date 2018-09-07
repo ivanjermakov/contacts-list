@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 @Service
 public class AddressService {
@@ -22,6 +23,10 @@ public class AddressService {
 		if (!address.valid()) throw new InvalidAddressException();
 		
 		addressRepository.insert(address);
+	}
+	
+	public Set<Address> select(int id) throws SQLException {
+		return addressRepository.select(id);
 	}
 	
 }

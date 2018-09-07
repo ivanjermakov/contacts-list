@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 @Service
 public class PhoneNumberService {
@@ -21,6 +22,10 @@ public class PhoneNumberService {
 	public void insert(PhoneNumber phoneNumber) throws InvalidPhoneNumberException, SQLException {
 		if (!phoneNumber.valid()) throw new InvalidPhoneNumberException();
 		phoneNumberRepository.insert(phoneNumber);
+	}
+	
+	public Set<PhoneNumber> select(int id) throws SQLException {
+		return phoneNumberRepository.select(id);
 	}
 	
 }

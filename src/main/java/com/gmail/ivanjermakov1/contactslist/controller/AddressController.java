@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 @RestController
 public class AddressController {
@@ -28,6 +29,12 @@ public class AddressController {
 	@PostMapping
 	public void insert(@RequestBody Address address) throws SQLException, InvalidAddressException {
 		addressService.insert(address);
+	}
+	
+	@RequestMapping("address/select")
+	@GetMapping
+	public Set<Address> select(@RequestParam("id") int id) throws SQLException {
+		return addressService.select(id);
 	}
 	
 }

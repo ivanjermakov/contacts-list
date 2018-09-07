@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Component
 public class AddressRepository {
@@ -34,6 +37,34 @@ public class AddressRepository {
 		statement.setInt(5, address.getPostcode());
 		
 		statement.execute();
+	}
+	
+	public Set<Address> select(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from address where contact_id = ?"
+		);
+		statement.setInt(1, id);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		return set(resultSet);
+	}
+	
+	private Set<Address> set(ResultSet resultSet) throws SQLException {
+		Set<Address> set = new LinkedHashSet<>();
+		
+		while (resultSet.next()) {
+			set.add(new Address(resultSet.getInt("contact_id"),
+					resultSet.getString("country"),
+					resultSet.getString("region"),
+					resultSet.getString("locality"),
+					resultSet.getInt("postcode")
+			));
+		}
+		
+		return set;
 	}
 	
 }

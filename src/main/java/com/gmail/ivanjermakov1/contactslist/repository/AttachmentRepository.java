@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Component
 public class AttachmentRepository {
@@ -34,6 +37,34 @@ public class AttachmentRepository {
 		statement.setString(5, attachment.getComment());
 		
 		statement.execute();
+	}
+	
+	public Set<Attachment> select(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from attachment where contact_id = ?"
+		);
+		statement.setInt(1, id);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		return set(resultSet);
+	}
+	
+	private Set<Attachment> set(ResultSet resultSet) throws SQLException {
+		Set<Attachment> set = new LinkedHashSet<>();
+		
+		while (resultSet.next()) {
+			set.add(new Attachment(resultSet.getInt("contact_id"),
+					resultSet.getString("name"),
+					resultSet.getDate("uploaded"),
+					resultSet.getString("path"),
+					resultSet.getString("comment")
+			));
+		}
+		
+		return set;
 	}
 	
 }

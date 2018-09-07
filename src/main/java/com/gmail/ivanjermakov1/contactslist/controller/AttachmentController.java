@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 @RestController
 public class AttachmentController {
@@ -28,6 +29,12 @@ public class AttachmentController {
 	@PostMapping
 	public void insert(@RequestBody Attachment attachment) throws SQLException, InvalidAttachmentException {
 		attachmentService.insert(attachment);
+	}
+	
+	@RequestMapping("attachment/select")
+	@GetMapping
+	public Set<Attachment> init(@RequestParam("id") int id) throws SQLException {
+		return attachmentService.select(id);
 	}
 	
 }

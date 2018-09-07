@@ -1,6 +1,7 @@
 package com.gmail.ivanjermakov1.contactslist.controller;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Avatar;
+import com.gmail.ivanjermakov1.contactslist.exception.EntityNotFoundException;
 import com.gmail.ivanjermakov1.contactslist.exception.InvalidAvatarException;
 import com.gmail.ivanjermakov1.contactslist.service.AvatarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class AvatarController {
 	@PostMapping
 	public void insert(@RequestBody Avatar avatar) throws SQLException, InvalidAvatarException {
 		avatarService.insert(avatar);
+	}
+	
+	@RequestMapping("avatar/select")
+	@GetMapping
+	public Avatar select(@RequestParam("id") int id) throws SQLException, EntityNotFoundException {
+		return avatarService.select(id);
 	}
 	
 }
