@@ -19,7 +19,7 @@ public class AttachmentRepository {
 		this.databaseConfigurator = databaseConfigurator;
 	}
 	
-	public void add(Attachment attachment) throws SQLException {
+	public void insert(Attachment attachment) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(

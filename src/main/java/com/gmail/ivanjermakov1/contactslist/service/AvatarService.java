@@ -18,9 +18,9 @@ public class AvatarService {
 		this.avatarRepository = avatarRepository;
 	}
 	
-	public void add(Avatar avatar) throws InvalidAvatarException, SQLException {
+	public void insert(Avatar avatar) throws InvalidAvatarException, SQLException {
 		if (!avatar.valid()) throw new InvalidAvatarException();
-		avatarRepository.add(avatar);
+		avatarRepository.insert(avatar);
 	}
 	
 }

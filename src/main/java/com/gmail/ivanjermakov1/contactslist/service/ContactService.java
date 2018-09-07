@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 @Service
 public class ContactService {
@@ -18,9 +19,17 @@ public class ContactService {
 		this.contactRepository = contactRepository;
 	}
 	
-	public void add(Contact contact) throws InvalidContactException, SQLException {
+	public void insert(Contact contact) throws InvalidContactException, SQLException {
 		if (!contact.valid()) throw new InvalidContactException();
-		contactRepository.add(contact);
+		contactRepository.insert(contact);
+	}
+	
+	public Set<Contact> selectAll() throws SQLException {
+		return contactRepository.selectAll();
+	}
+	
+	public Set<Contact> select(int amount, int offset) throws SQLException {
+		return contactRepository.select(amount, offset);
 	}
 	
 }

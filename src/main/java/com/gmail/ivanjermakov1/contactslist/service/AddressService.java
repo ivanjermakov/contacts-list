@@ -18,10 +18,10 @@ public class AddressService {
 		this.addressRepository = addressRepository;
 	}
 	
-	public void add(Address address) throws InvalidAddressException, SQLException {
+	public void insert(Address address) throws InvalidAddressException, SQLException {
 		if (!address.valid()) throw new InvalidAddressException();
 		
-		addressRepository.add(address);
+		addressRepository.insert(address);
 	}
 	
 }

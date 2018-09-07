@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Component
 public class ContactRepository {
@@ -19,7 +22,7 @@ public class ContactRepository {
 		this.databaseConfigurator = databaseConfigurator;
 	}
 	
-	public void add(Contact contact) throws SQLException {
+	public void insert(Contact contact) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
@@ -36,6 +39,50 @@ public class ContactRepository {
 		statement.setString(7, contact.getMaritalStatus());
 		
 		statement.execute();
+	}
+	
+	public Set<Contact> selectAll() throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from contact"
+		);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		return set(resultSet);
+	}
+	
+	public Set<Contact> select(int amount, int offset) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from contact limit ? offset ?"
+		);
+		statement.setInt(1, amount);
+		statement.setInt(2, offset);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		return set(resultSet);
+	}
+	
+	private Set<Contact> set(ResultSet resultSet) throws SQLException {
+		Set<Contact> set = new LinkedHashSet<>();
+		
+		while (resultSet.next()) {
+			set.add(new Contact(resultSet.getInt("id"),
+					resultSet.getString("name"),
+					resultSet.getString("surname"),
+					resultSet.getString("patronymic"),
+					resultSet.getBoolean("sex"),
+					resultSet.getDate("birth"),
+					resultSet.getString("nationality"),
+					resultSet.getString("marital_status")
+			));
+		}
+		
+		return set;
 	}
 	
 }

@@ -20,11 +20,11 @@ public class AttachmentService {
 		this.attachmentRepository = attachmentRepository;
 	}
 	
-	public void add(Attachment attachment) throws InvalidAttachmentException, SQLException {
+	public void insert(Attachment attachment) throws InvalidAttachmentException, SQLException {
 		if (!attachment.valid()) throw new InvalidAttachmentException();
 		
 		attachment.setUploaded(new Date(Calendar.getInstance().getTimeInMillis()));
-		attachmentRepository.add(attachment);
+		attachmentRepository.insert(attachment);
 	}
 	
 }

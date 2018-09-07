@@ -19,7 +19,7 @@ public class PhoneNumberRepository {
 		this.databaseConfigurator = databaseConfigurator;
 	}
 	
-	public void add(PhoneNumber phoneNumber) throws SQLException {
+	public void insert(PhoneNumber phoneNumber) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(

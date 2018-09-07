@@ -19,7 +19,7 @@ public class AddressRepository {
 		this.databaseConfigurator = databaseConfigurator;
 	}
 	
-	public void add(Address address) throws SQLException {
+	public void insert(Address address) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(

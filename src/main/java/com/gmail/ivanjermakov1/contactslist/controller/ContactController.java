@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 @RestController
 public class ContactController {
@@ -24,10 +25,22 @@ public class ContactController {
 		return new Contact();
 	}
 	
-	@RequestMapping("contact/add")
+	@RequestMapping("contact/insert")
 	@PostMapping
-	public void add(@RequestBody Contact contact) throws InvalidContactException, SQLException {
-		contactService.add(contact);
+	public void insert(@RequestBody Contact contact) throws InvalidContactException, SQLException {
+		contactService.insert(contact);
+	}
+	
+	@RequestMapping("contact/selectAll")
+	@GetMapping
+	public Set<Contact> selectAll() throws SQLException {
+		return contactService.selectAll();
+	}
+	
+	@RequestMapping("contact/select")
+	@GetMapping
+	public Set<Contact> selectAll(@RequestParam("amount") int amount, @RequestParam("offset") int offset) throws SQLException {
+		return contactService.select(amount, offset);
 	}
 	
 }

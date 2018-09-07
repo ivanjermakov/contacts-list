@@ -24,10 +24,10 @@ public class AvatarController {
 		return new Avatar();
 	}
 	
-	@RequestMapping("avatar/add")
+	@RequestMapping("avatar/insert")
 	@PostMapping
-	public void add(@RequestBody Avatar avatar) throws SQLException, InvalidAvatarException {
-		avatarService.add(avatar);
+	public void insert(@RequestBody Avatar avatar) throws SQLException, InvalidAvatarException {
+		avatarService.insert(avatar);
 	}
 	
 }

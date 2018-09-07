@@ -24,10 +24,10 @@ public class AddressController {
 		return new Address();
 	}
 	
-	@RequestMapping("address/add")
+	@RequestMapping("address/insert")
 	@PostMapping
-	public void add(@RequestBody Address address) throws SQLException, InvalidAddressException {
-		addressService.add(address);
+	public void insert(@RequestBody Address address) throws SQLException, InvalidAddressException {
+		addressService.insert(address);
 	}
 	
 }

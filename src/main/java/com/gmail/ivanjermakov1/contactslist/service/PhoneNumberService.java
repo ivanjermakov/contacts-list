@@ -18,9 +18,9 @@ public class PhoneNumberService {
 		this.phoneNumberRepository = phoneNumberRepository;
 	}
 	
-	public void add(PhoneNumber phoneNumber) throws InvalidPhoneNumberException, SQLException {
+	public void insert(PhoneNumber phoneNumber) throws InvalidPhoneNumberException, SQLException {
 		if (!phoneNumber.valid()) throw new InvalidPhoneNumberException();
-		phoneNumberRepository.add(phoneNumber);
+		phoneNumberRepository.insert(phoneNumber);
 	}
 	
 }

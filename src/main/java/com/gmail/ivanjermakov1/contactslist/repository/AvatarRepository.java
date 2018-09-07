@@ -19,7 +19,7 @@ public class AvatarRepository {
 		this.databaseConfigurator = databaseConfigurator;
 	}
 	
-	public void add(Avatar avatar) throws SQLException {
+	public void insert(Avatar avatar) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(

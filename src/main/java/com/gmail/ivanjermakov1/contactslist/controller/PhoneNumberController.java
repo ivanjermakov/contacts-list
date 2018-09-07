@@ -25,10 +25,10 @@ public class PhoneNumberController {
 		return new PhoneNumber();
 	}
 	
-	@RequestMapping("number/add")
+	@RequestMapping("number/insert")
 	@PostMapping
-	public void add(@RequestBody PhoneNumber phoneNumber) throws InvalidPhoneNumberException, SQLException {
-		phoneNumberService.add(phoneNumber);
+	public void insert(@RequestBody PhoneNumber phoneNumber) throws InvalidPhoneNumberException, SQLException {
+		phoneNumberService.insert(phoneNumber);
 	}
 	
 	

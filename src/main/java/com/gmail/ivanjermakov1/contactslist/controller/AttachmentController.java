@@ -24,10 +24,10 @@ public class AttachmentController {
 		return new Attachment();
 	}
 	
-	@RequestMapping("attachment/add")
+	@RequestMapping("attachment/insert")
 	@PostMapping
-	public void add(@RequestBody Attachment attachment) throws SQLException, InvalidAttachmentException {
-		attachmentService.add(attachment);
+	public void insert(@RequestBody Attachment attachment) throws SQLException, InvalidAttachmentException {
+		attachmentService.insert(attachment);
 	}
 	
 }
