@@ -1,13 +1,8 @@
 package com.gmail.ivanjermakov1.contactslist.entity;
 
-import com.gmail.ivanjermakov1.contactslist.util.db.Insertable;
-
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
-public class Attachment implements Insertable {
+public class Attachment {
 	
 	private Integer contactId;
 	private String name;
@@ -53,22 +48,6 @@ public class Attachment implements Insertable {
 	public boolean valid() {
 		return name != null && !name.isEmpty() &&
 				path != null && !path.isEmpty();
-	}
-	
-	@Override
-	public PreparedStatement insert(Connection connection) throws SQLException {
-		PreparedStatement statement = connection.prepareStatement(
-				"insert into " +
-						"attachment(contact_id, name, uploaded, path, comment) " +
-						"values (?, ?, ?, ?, ?)"
-		);
-		statement.setInt(1, contactId);
-		statement.setString(2, name);
-		statement.setDate(3, uploaded);
-		statement.setString(4, path);
-		statement.setString(5, comment);
-		
-		return statement;
 	}
 	
 }

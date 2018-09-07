@@ -1,12 +1,6 @@
 package com.gmail.ivanjermakov1.contactslist.entity;
 
-import com.gmail.ivanjermakov1.contactslist.util.db.Insertable;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-public class PhoneNumber implements Insertable {
+public class PhoneNumber {
 	
 	private Integer contactId;
 	private Integer areaCode;
@@ -57,23 +51,6 @@ public class PhoneNumber implements Insertable {
 				operatorCode != null &&
 				number != null &&
 				type != null;
-	}
-	
-	@Override
-	public PreparedStatement insert(Connection connection) throws SQLException {
-		PreparedStatement statement = connection.prepareStatement(
-				"insert into " +
-						"phone_number(contact_id, area_code, operator_code, number, type, comment) " +
-						"values (?, ?, ?, ?, ?, ?)"
-		);
-		statement.setInt(1, contactId);
-		statement.setInt(2, areaCode);
-		statement.setInt(3, operatorCode);
-		statement.setInt(4, number);
-		statement.setBoolean(5, type);
-		statement.setString(6, comment);
-		
-		return statement;
 	}
 	
 }

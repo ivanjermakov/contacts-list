@@ -2,7 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.service;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.exception.InvalidContactException;
-import com.gmail.ivanjermakov1.contactslist.repository.Repository;
+import com.gmail.ivanjermakov1.contactslist.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.sql.SQLException;
 @Service
 public class ContactService {
 	
-	private final Repository<Contact> contactRepository;
+	private final ContactRepository contactRepository;
 	
 	@Autowired
-	public ContactService(Repository<Contact> contactRepository) {
+	public ContactService(ContactRepository contactRepository) {
 		this.contactRepository = contactRepository;
 	}
 	

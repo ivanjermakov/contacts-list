@@ -2,7 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.service;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Avatar;
 import com.gmail.ivanjermakov1.contactslist.exception.InvalidAvatarException;
-import com.gmail.ivanjermakov1.contactslist.repository.Repository;
+import com.gmail.ivanjermakov1.contactslist.repository.AvatarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.sql.SQLException;
 @Service
 public class AvatarService {
 	
-	private final Repository<Avatar> avatarRepository;
+	private final AvatarRepository avatarRepository;
 	
 	@Autowired
-	public AvatarService(Repository<Avatar> avatarRepository) {
+	public AvatarService(AvatarRepository avatarRepository) {
 		this.avatarRepository = avatarRepository;
 	}
 	
