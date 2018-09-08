@@ -5,22 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableWebMvc
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebFileConfig implements WebMvcConfigurer {
 	
 	private final UploadService uploadService;
 	
 	@Autowired
-	public WebConfig(UploadService uploadService) {
+	public WebFileConfig(UploadService uploadService) {
 		this.uploadService = uploadService;
 	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/" + uploadService.getWebResources() + "**")
+		registry
+				.addResourceHandler("/" + uploadService.getWebResources() + "**")
 				.addResourceLocations("file:/" + uploadService.getUploadPlaceholder());
 	}
 	
