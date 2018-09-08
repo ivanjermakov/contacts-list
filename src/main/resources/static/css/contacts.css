@@ -1,0 +1,31 @@
+#contacts-wrapper {
+    display: block;
+
+    margin: 10px;
+
+    min-height: 0;
+    min-width: 0;
+}
+
+.contact {
+    background-color: #f8f8f8;
+    overflow: hidden;
+
+    margin-bottom: 10px;
+
+    padding: 10px;
+    font-size: 30px;
+}
+
+.contact .name {
+    text-decoration: none;
+    color: black;
+
+    display: block;
+
+    margin: 1em 0;
+}
+
+.contact .name:hover {
+    color: #20bcb9;
+}
