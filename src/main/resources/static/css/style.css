@@ -20,7 +20,7 @@ body {
 }
 
 .header p {
-    font-style: italic;
+    font-size: 24px;
 }
 
 .navigation-bar {
@@ -29,16 +29,18 @@ body {
 }
 
 .navigation-bar a {
+    font-size: 24px;
     float: left;
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 20px 16px;
+    padding: 16px;
     text-decoration: none;
 }
 
 .navigation-bar a:hover {
     background-color: #ddd;
+    font-weight: bold;
     color: #20bcb9;
 }
 

@@ -8,13 +8,23 @@
 }
 
 .contact {
+    display: table;
+    border-spacing: 10px;
+
+    width: 100%;
+
     background-color: #f8f8f8;
     overflow: hidden;
 
     margin-bottom: 10px;
 
-    padding: 10px;
     font-size: 30px;
+}
+
+.contact .pre {
+    margin-right: 16px;
+    font-size: 30px;
+    color: #6b6b6b;
 }
 
 .contact .name {
@@ -28,4 +38,14 @@
 
 .contact .name:hover {
     color: #20bcb9;
+}
+
+.inline {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.contact .inline input {
+    margin-left: 38%;
+    transform: scale(2);
 }
