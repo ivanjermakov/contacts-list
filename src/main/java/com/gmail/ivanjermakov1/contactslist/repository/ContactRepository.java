@@ -5,10 +5,7 @@ import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -33,7 +30,11 @@ public class ContactRepository {
 		statement.setString(1, contact.getName());
 		statement.setString(2, contact.getSurname());
 		statement.setString(3, contact.getPatronymic());
-		statement.setBoolean(4, contact.getSex());
+		if (contact.getSex() != null) {
+			statement.setBoolean(4, contact.getSex());
+		} else {
+			statement.setNull(4, Types.BOOLEAN);
+		}
 		statement.setDate(5, contact.getBirth());
 		statement.setString(6, contact.getNationality());
 		statement.setString(7, contact.getMaritalStatus());
