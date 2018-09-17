@@ -24,8 +24,8 @@ public class ContactRepository {
 		
 		PreparedStatement statement = connection.prepareStatement(
 				"insert into " +
-						"contact(name, surname, patronymic, sex, birth, nationality, marital_status) " +
-						"values (?, ?, ?, ?, ?, ?, ?)"
+						"contact(name, surname, patronymic, sex, birth, nationality, marital_status, website, email, workplace) " +
+						"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		);
 		statement.setString(1, contact.getName());
 		statement.setString(2, contact.getSurname());
@@ -38,6 +38,9 @@ public class ContactRepository {
 		statement.setDate(5, contact.getBirth());
 		statement.setString(6, contact.getNationality());
 		statement.setString(7, contact.getMaritalStatus());
+		statement.setString(8, contact.getWebsite());
+		statement.setString(9, contact.getEmail());
+		statement.setString(10, contact.getWorkplace());
 		
 		statement.execute();
 	}
@@ -79,7 +82,10 @@ public class ContactRepository {
 					resultSet.getBoolean("sex"),
 					resultSet.getDate("birth"),
 					resultSet.getString("nationality"),
-					resultSet.getString("marital_status")
+					resultSet.getString("marital_status"),
+					resultSet.getString("website"),
+					resultSet.getString("email"),
+					resultSet.getString("workplace")
 			));
 		}
 		
