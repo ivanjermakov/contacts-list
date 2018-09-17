@@ -24,6 +24,8 @@ input[type=text] {
     border-radius: 1px;
     font-size: 24px;
 
+    padding: 2px;
+
     width: 100%;
 }
 
@@ -33,6 +35,8 @@ input[type=date] {
     border: 0.6px solid black;
     border-radius: 1px;
     font-size: 24px;
+
+    padding: 2px;
 
     width: 100%;
 }

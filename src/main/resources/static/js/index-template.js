@@ -13,7 +13,10 @@ displayContact({
 	"sex": true,
 	"birth": "06.06.2000",
 	"nationality": "BEL",
-	"maritalStatus": null
+	"maritalStatus": null,
+	"website": "la.com",
+	"email": "la@g.com",
+	"workplace": "somewhere"
 }, {
 	"contactId": null,
 	"country": "BEL",
