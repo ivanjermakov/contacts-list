@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=300; initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+	<meta name="viewport" content="width=300, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
 
 	<title>Contacts List</title>
 
@@ -16,6 +16,8 @@
 	<!--mustache.js-->
 	<script type="text/javascript"
 	        src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.3/mustache.js"></script>
+
+	<script type="text/javascript" src="js/client.js"></script>
 </head>
 
 <body>
@@ -51,11 +53,12 @@
 			<input type="checkbox" class="selected">
 		</div>
 		<div class="inline">
-			<p><a href="#" class="name"><span class="pre"><i class="fas fa-user"></i></span>
-				{{name}} {{surname}} {{patronymic}}</a></p>
-			<p class="birth"><span class="pre"><i class="fas fa-birthday-cake"></i></span>{{birth}}</p>
-			<p class="address"><span class="pre"><i class="fas fa-home"></i></span>{{locality}}</p>
-			<p class="workplace"><span class="pre"><i class="fas fa-building"></i></span>{{workplace}}</p>
+			<div><a class="name" href="edit-contact.html?id={{id}}"><span class="pre"><i
+					class="fas fa-user"></i></span>
+				{{name}} {{surname}} {{patronymic}}</a></div>
+			<div class="birth"><span class="pre"><i class="fas fa-birthday-cake"></i></span>{{birth}}</div>
+			<div class="address"><span class="pre"><i class="fas fa-home"></i></span>{{locality}}</div>
+			<div class="workplace"><span class="pre"><i class="fas fa-building"></i></span>{{workplace}}</div>
 		</div>
 	</div>
 

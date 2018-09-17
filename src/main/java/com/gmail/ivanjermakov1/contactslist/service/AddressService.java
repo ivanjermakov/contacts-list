@@ -25,7 +25,7 @@ public class AddressService {
 		addressRepository.insert(address);
 	}
 	
-	public Set<Address> select(int id) throws SQLException {
+	public Address select(int id) throws SQLException {
 		return addressRepository.select(id);
 	}
 	

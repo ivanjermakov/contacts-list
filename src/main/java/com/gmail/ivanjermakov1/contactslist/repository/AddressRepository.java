@@ -39,7 +39,7 @@ public class AddressRepository {
 		statement.execute();
 	}
 	
-	public Set<Address> select(int id) throws SQLException {
+	public Address select(int id) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
@@ -48,23 +48,14 @@ public class AddressRepository {
 		statement.setInt(1, id);
 		
 		ResultSet resultSet = statement.executeQuery();
+		resultSet.next();
 		
-		return set(resultSet);
-	}
-	
-	private Set<Address> set(ResultSet resultSet) throws SQLException {
-		Set<Address> set = new LinkedHashSet<>();
-		
-		while (resultSet.next()) {
-			set.add(new Address(resultSet.getInt("contact_id"),
-					resultSet.getString("country"),
-					resultSet.getString("region"),
-					resultSet.getString("locality"),
-					resultSet.getInt("postcode")
-			));
-		}
-		
-		return set;
+		return new Address(resultSet.getInt("contact_id"),
+				resultSet.getString("country"),
+				resultSet.getString("region"),
+				resultSet.getString("locality"),
+				resultSet.getInt("postcode")
+		);
 	}
 	
 }

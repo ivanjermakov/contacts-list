@@ -33,7 +33,7 @@ public class AddressController {
 	
 	@RequestMapping("address/select")
 	@GetMapping
-	public Set<Address> select(@RequestParam("id") int id) throws SQLException {
+	public Address select(@RequestParam("id") int id) throws SQLException {
 		return addressService.select(id);
 	}
 	

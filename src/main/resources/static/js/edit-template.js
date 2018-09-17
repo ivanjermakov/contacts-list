@@ -1,11 +1,19 @@
-function displayContact(contact, address) {
+function display(contact, address, numbers, attachments) {
 	var targetContainer = document.getElementsByClassName("content")[0];
 	var template = document.getElementById("contact-template").innerHTML;
 
 	targetContainer.innerHTML = Mustache.render(template, Object.assign(contact, address));
+
+	numbers.forEach(function (number) {
+		displayNumber(number);
+	});
+
+	attachments.forEach(function (attachment) {
+		displayAttachment(attachment);
+	});
 }
 
-function displayPhoneNumber(phoneNumber) {
+function displayNumber(phoneNumber) {
 	var targetContainer = document.getElementsByClassName("phone-numbers")[0];
 	var template = document.getElementById("phone-number-template").innerHTML;
 
@@ -19,39 +27,22 @@ function displayAttachment(attachment) {
 	targetContainer.innerHTML += (Mustache.render(template, attachment));
 }
 
-displayContact({
-	"id": null,
-	"name": "Иван",
-	"surname": "Ермаков",
-	"patronymic": "Алекс",
-	"sex": true,
-	"birth": "06.06.2000",
-	"nationality": "BEL",
-	"maritalStatus": null,
-	"website": "la.com",
-	"email": "la@g.com",
-	"workplace": "somewhere"
-}, {
-	"contactId": null,
-	"country": "BEL",
-	"region": "Minsk",
-	"locality": "Ds st. 2109",
-	"postcode": 1234567
-});
+function load() {
+	var id = new URL(window.location).searchParams.get("id");
 
-displayPhoneNumber({
-	"contactId": null,
-	"areaCode": 123,
-	"operatorCode": 12,
-	"number": 1234567,
-	"type": "Mobile",
-	"comment": "Some random comment"
-});
+	console.log(id);
 
-displayAttachment({
-	"contactId": 1,
-	"name": "file",
-	"uploaded": "2018-09-07",
-	"path": "lflf/a",
-	"comment": "Some random comment"
-});
+	var contact = JSON.parse(httpGetSync("/contact/selectById?id=" + id));
+	var address = JSON.parse(httpGetSync("/address/select?id=" + id));
+	var numbers = JSON.parse(httpGetSync("/number/select?id=" + id));
+	var attachments = JSON.parse(httpGetSync("/attachment/select?id=" + id));
+
+	console.log(contact);
+	console.log(address);
+	console.log(numbers);
+	console.log(attachments);
+
+	display(contact, address, numbers, attachments)
+}
+
+load();

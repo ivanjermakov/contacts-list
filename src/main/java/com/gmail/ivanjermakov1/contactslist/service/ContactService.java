@@ -28,6 +28,10 @@ public class ContactService {
 		return contactRepository.selectAll();
 	}
 	
+	public Contact selectById(int id) throws SQLException {
+		return contactRepository.selectById(id);
+	}
+	
 	public Set<Contact> select(int amount, int offset) throws SQLException {
 		return contactRepository.select(amount, offset);
 	}

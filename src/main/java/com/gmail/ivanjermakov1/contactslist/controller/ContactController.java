@@ -37,9 +37,15 @@ public class ContactController {
 		return contactService.selectAll();
 	}
 	
+	@RequestMapping("contact/selectById")
+	@GetMapping
+	public Contact selectById(@RequestParam("id") int id) throws SQLException {
+		return contactService.selectById(id);
+	}
+	
 	@RequestMapping("contact/select")
 	@GetMapping
-	public Set<Contact> selectAll(@RequestParam("amount") int amount, @RequestParam("offset") int offset) throws SQLException {
+	public Set<Contact> select(@RequestParam("amount") int amount, @RequestParam("offset") int offset) throws SQLException {
 		return contactService.select(amount, offset);
 	}
 	
