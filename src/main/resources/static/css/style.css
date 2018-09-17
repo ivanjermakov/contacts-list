@@ -22,6 +22,11 @@ body {
     background-size: cover;
 }
 
+.home-link {
+    text-decoration: none;
+    color: unset;
+}
+
 .layer {
     background: rgba(255, 255, 255, 0.6);
 
