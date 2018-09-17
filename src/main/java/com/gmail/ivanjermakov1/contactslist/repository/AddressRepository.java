@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Component
 public class AddressRepository {
@@ -37,6 +35,8 @@ public class AddressRepository {
 		statement.setInt(5, address.getPostcode());
 		
 		statement.execute();
+		
+		connection.close();
 	}
 	
 	public Address select(int id) throws SQLException {
@@ -49,6 +49,8 @@ public class AddressRepository {
 		
 		ResultSet resultSet = statement.executeQuery();
 		resultSet.next();
+		
+		connection.close();
 		
 		return new Address(resultSet.getInt("contact_id"),
 				resultSet.getString("country"),

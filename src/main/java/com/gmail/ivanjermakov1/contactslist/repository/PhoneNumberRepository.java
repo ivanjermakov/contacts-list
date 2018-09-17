@@ -38,6 +38,8 @@ public class PhoneNumberRepository {
 		statement.setString(6, phoneNumber.getComment());
 		
 		statement.execute();
+		
+		connection.close();
 	}
 	
 	public Set<PhoneNumber> select(int id) throws SQLException {
@@ -49,6 +51,8 @@ public class PhoneNumberRepository {
 		statement.setInt(1, id);
 		
 		ResultSet resultSet = statement.executeQuery();
+		
+		connection.close();
 		
 		return set(resultSet);
 	}

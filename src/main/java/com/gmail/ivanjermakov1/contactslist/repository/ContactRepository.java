@@ -10,7 +10,6 @@ import java.sql.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-//TODO: close connections in another repositories (cause connection overflow)
 @Component
 public class ContactRepository {
 	

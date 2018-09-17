@@ -32,6 +32,8 @@ public class AvatarRepository {
 		statement.setInt(1, avatar.getContactId());
 		statement.setString(2, avatar.getPath());
 		
+		connection.close();
+		
 		statement.execute();
 	}
 	
@@ -45,6 +47,8 @@ public class AvatarRepository {
 		
 		ResultSet resultSet = statement.executeQuery();
 		if (!resultSet.next()) throw new EntityNotFoundException("no such entity");
+		
+		connection.close();
 		
 		return new Avatar(resultSet.getInt("contact_id"),
 				resultSet.getString("path"));

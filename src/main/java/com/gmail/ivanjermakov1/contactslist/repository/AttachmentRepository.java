@@ -36,6 +36,8 @@ public class AttachmentRepository {
 		statement.setString(4, attachment.getPath());
 		statement.setString(5, attachment.getComment());
 		
+		connection.close();
+		
 		statement.execute();
 	}
 	
@@ -48,6 +50,8 @@ public class AttachmentRepository {
 		statement.setInt(1, id);
 		
 		ResultSet resultSet = statement.executeQuery();
+		
+		connection.close();
 		
 		return set(resultSet);
 	}
