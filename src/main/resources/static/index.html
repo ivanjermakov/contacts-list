@@ -51,13 +51,12 @@
 <script id="contact-template" type="text/template">
 
 	<div class="contact">
-		<div class="inline">
-			<input type="checkbox" class="selected">
-		</div>
-		<div class="inline">
-			<div><a class="name" href="edit-contact.html?id={{id}}"><span class="pre"><i
+		<input type="checkbox" class="selected">
+		<div class="contact-content">
+			<div class="name-wrapper"><a class="name" href="edit-contact.html?id={{id}}"><span class="pre"><i
 					class="fas fa-user"></i></span>
-				{{name}} {{surname}} {{patronymic}}</a></div>
+				{{name}} {{surname}} {{patronymic}}</a>
+			</div>
 			<div class="birth"><span class="pre"><i class="fas fa-birthday-cake"></i></span>{{birth}}</div>
 			<div class="address"><span class="pre"><i class="fas fa-home"></i></span>{{locality}}</div>
 			<div class="workplace"><span class="pre"><i class="fas fa-building"></i></span>{{workplace}}</div>

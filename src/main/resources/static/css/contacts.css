@@ -30,20 +30,28 @@
     color: black;
 
     display: block;
-
-    margin: 1em 0;
 }
 
 .contact .name:hover {
     color: #20bcb9;
 }
 
-.inline {
-    display: table-cell;
-    vertical-align: middle;
+.contact {
+    display: flex;
+	align-items: center;
+
+	padding: 10px;
 }
 
-.contact .inline input {
-    margin-left: 38%;
+.contact input {
+	width: 60px;
     transform: scale(2);
+}
+
+.contact-content {
+	text-align: left;
+}
+
+.contact-content div {
+	margin: 10px 0;
 }
