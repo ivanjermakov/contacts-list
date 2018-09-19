@@ -3,6 +3,7 @@ package com.gmail.ivanjermakov1.contactslist.repository;
 import com.gmail.ivanjermakov1.contactslist.config.DatabaseConfigurator;
 import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.entity.ContactMainInfo;
+import com.gmail.ivanjermakov1.contactslist.util.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -114,11 +115,12 @@ public class ContactRepository {
 		Set<Contact> set = new LinkedHashSet<>();
 		
 		while (resultSet.next()) {
-			set.add(new Contact(resultSet.getInt("id"),
+			set.add(new Contact(
+					DBUtils.nullableInt(resultSet, "id"),
 					resultSet.getString("name"),
 					resultSet.getString("surname"),
 					resultSet.getString("patronymic"),
-					resultSet.getBoolean("sex"),
+					DBUtils.nullableBoolean(resultSet, "sex"),
 					resultSet.getDate("birth"),
 					resultSet.getString("nationality"),
 					resultSet.getString("marital_status"),
@@ -135,7 +137,7 @@ public class ContactRepository {
 		
 		while (resultSet.next()) {
 			set.add(new ContactMainInfo(
-					resultSet.getInt("id"),
+					DBUtils.nullableInt(resultSet, "id"),
 					resultSet.getString("name"),
 					resultSet.getString("surname"),
 					resultSet.getString("patronymic"),

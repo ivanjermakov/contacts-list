@@ -11,6 +11,16 @@ function display(contact, address, numbers, attachments) {
 	attachments.forEach(function (attachment) {
 		displayAttachment(attachment);
 	});
+
+	// filling complex forms
+	if (contact.sex != null) {
+		if (contact.sex) {
+			document.getElementById("male-radio").checked = true;
+		} else {
+			document.getElementById("female-radio").checked = true;
+		}
+	}
+
 }
 
 function displayNumber(phoneNumber) {
@@ -30,17 +40,10 @@ function displayAttachment(attachment) {
 function load() {
 	var id = new URL(window.location).searchParams.get("id");
 
-	console.log(id);
-
 	var contact = JSON.parse(httpGetSync("/contact/selectById?id=" + id));
 	var address = JSON.parse(httpGetSync("/address/select?id=" + id));
 	var numbers = JSON.parse(httpGetSync("/number/select?id=" + id));
 	var attachments = JSON.parse(httpGetSync("/attachment/select?id=" + id));
-
-	console.log(contact);
-	console.log(address);
-	console.log(numbers);
-	console.log(attachments);
 
 	display(contact, address, numbers, attachments)
 }

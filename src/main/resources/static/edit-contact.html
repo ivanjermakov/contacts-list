@@ -56,8 +56,8 @@
 			<label>Patronymic:<input type="text" value="{{patronymic}}"></label>
 			<label>Date of birth:<input type="date" value="{{birth}}"></label>
 			<label>Sex:
-				<input type="radio" name="gender" value="male"> Male
-				<input type="radio" name="gender" value="female"> Female
+				<input id="male-radio" type="radio" name="gender" value="male"> Male
+				<input id="female-radio" type="radio" name="gender" value="female"> Female
 			</label>
 			<label>Nationality:<input type="text" value="{{nationality}}"></label>
 			<label>Marital status:<input type="text" value="{{maritalStatus}}"></label>
@@ -77,12 +77,26 @@
 
 	<div class="phone-numbers-and-attachments-wrapper">
 		<div class="phone-numbers">
-			<div class="heading">Phone numbers</div>
+			<div class="heading-wrapper">
+				<div class="heading">Phone numbers</div>
+				<div class="options">
+					<a href="#"><i class="fas fa-plus"></i></a>
+					<a href="#"><i class="fas fa-pen"></i></a>
+					<a href="#"><i class="fas fa-trash"></i></a>
+				</div>
+			</div>
 			<!--PHONE NUMBERS HERE-->
 		</div>
 
 		<div class="attachments">
-			<div class="heading">Attachments</div>
+			<div class="heading-wrapper">
+				<div class="heading">Attachments</div>
+				<div class="options">
+					<a href="#"><i class="fas fa-plus"></i></a>
+					<a href="#"><i class="fas fa-pen"></i></a>
+					<a href="#"><i class="fas fa-trash"></i></a>
+				</div>
+			</div>
 			<!--ATTACHMENTS HERE-->
 		</div>
 	</div>
