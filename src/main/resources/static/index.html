@@ -31,7 +31,7 @@
 	<div class="navigation-bar">
 		<div class="left">
 			<a href="#"><i class="fas fa-plus"></i></a>
-			<a href="#"><i class="fas fa-pen"></i></a>
+			<a href="#" onclick="edit()"><i class="fas fa-pen"></i></a>
 			<a href="#"><i class="fas fa-trash"></i></a>
 		</div>
 		<div class="right">
@@ -50,7 +50,7 @@
 <!--TEMPLATES-->
 <script id="contact-template" type="text/template">
 
-	<div class="contact">
+	<div class="contact" id="{{id}}">
 		<input type="checkbox" class="selected">
 		<div class="contact-content">
 			<div class="name-wrapper"><a class="name" href="edit-contact.html?id={{id}}"><span class="pre"><i
