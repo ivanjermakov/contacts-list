@@ -15,4 +15,12 @@ public class DBUtils {
 		return resultSet.wasNull() ? null : result;
 	}
 	
+	public static String where(String columnName, String value) {
+		return "lower(" + columnName + ") like lower(\'%" + value + "%\')";
+	}
+	
+	public static String quotes(String string) {
+		return "\'" + string + "\'";
+	}
+	
 }

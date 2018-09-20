@@ -111,7 +111,7 @@ public class ContactRepository {
 		return mainInfoSet(resultSet);
 	}
 	
-	private Set<Contact> set(ResultSet resultSet) throws SQLException {
+	public Set<Contact> set(ResultSet resultSet) throws SQLException {
 		Set<Contact> set = new LinkedHashSet<>();
 		
 		while (resultSet.next()) {
