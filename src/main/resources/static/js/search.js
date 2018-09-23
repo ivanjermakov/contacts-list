@@ -27,11 +27,7 @@ function getSearchQuery() {
 }
 
 function displaySearchResults(searchQuery) {
-	// clear previous search results
-	var contactsWrapper = document.getElementById("contacts-wrapper");
-	while (contactsWrapper.firstChild) {
-		contactsWrapper.removeChild(contactsWrapper.firstChild);
-	}
+	clearMainInfo();
 
 	httpPost("/search/", searchQuery, function (json) {
 		var searchResult = JSON.parse(json);

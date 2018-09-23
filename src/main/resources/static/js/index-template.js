@@ -5,6 +5,13 @@ function displayMainInfo(contactMainInfo) {
 	targetContainer.innerHTML += Mustache.render(template, contactMainInfo);
 }
 
+function clearMainInfo() {
+	var contactsWrapper = document.getElementById("contacts-wrapper");
+	while (contactsWrapper.firstChild) {
+		contactsWrapper.removeChild(contactsWrapper.firstChild);
+	}
+}
+
 function load() {
 	httpGet("/contactMainInfo/select", function (json) {
 		var contactsMainInfo = JSON.parse(json);
@@ -44,4 +51,22 @@ function edit() {
 	}
 
 	window.location.replace("/edit-contact.html?id=" + ids[0]);
+}
+
+function remove() {
+	var ids = getCheckedIds();
+
+	if (ids.length === 0) {
+		alert("Check any contacts to delete and try again.");
+		return;
+	}
+
+	if (!confirm("Are you sure want to delete selected contacts?")) return;
+
+	httpPost("/contact/remove", ids, function () {
+		// reload if removed
+		clearMainInfo();
+		load();
+	});
+
 }

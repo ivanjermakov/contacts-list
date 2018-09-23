@@ -40,12 +40,20 @@ function displayAttachment(attachment) {
 function load() {
 	var id = new URL(window.location).searchParams.get("id");
 
-	var contact = JSON.parse(httpGetSync("/contact/selectById?id=" + id));
-	var address = JSON.parse(httpGetSync("/address/select?id=" + id));
-	var numbers = JSON.parse(httpGetSync("/number/select?id=" + id));
-	var attachments = JSON.parse(httpGetSync("/attachment/select?id=" + id));
+	if (id) {
+		var contact = JSON.parse(httpGetSync("/contact/selectById?id=" + id));
+		var address = JSON.parse(httpGetSync("/address/select?id=" + id));
+		var numbers = JSON.parse(httpGetSync("/number/select?id=" + id));
+		var attachments = JSON.parse(httpGetSync("/attachment/select?id=" + id));
 
-	display(contact, address, numbers, attachments)
+		display(contact, address, numbers, attachments);
+	} else {
+		var targetContainer = document.getElementsByClassName("content")[0];
+		var template = document.getElementById("contact-template").innerHTML;
+
+		targetContainer.innerHTML = Mustache.render(template, Object.create(null));
+	}
+
 }
 
 load();
