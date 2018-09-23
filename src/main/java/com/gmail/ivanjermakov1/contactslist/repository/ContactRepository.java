@@ -85,9 +85,13 @@ public class ContactRepository {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
-				"update contact set removed = true where id = ? and removed = false"
+				"update contact\n" +
+						"set removed = true\n" +
+						"where id = ?"
 		);
 		statement.setInt(1, id);
+		
+		statement.execute();
 		
 		connection.close();
 		

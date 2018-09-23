@@ -66,9 +66,13 @@ public class AddressRepository {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
-				"update address set removed = true where contact_id = ? and removed = false"
+				"update address\n" +
+						"set removed = true\n" +
+						"where contact_id = ?"
 		);
 		statement.setInt(1, id);
+		
+		statement.execute();
 		
 		connection.close();
 	}

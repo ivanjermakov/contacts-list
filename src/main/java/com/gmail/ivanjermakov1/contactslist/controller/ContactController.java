@@ -52,7 +52,7 @@ public class ContactController {
 	
 	@RequestMapping("contact/remove")
 	@PostMapping
-	public void remove(List<Integer> ids) throws SQLException {
+	public void remove(@RequestBody List<Integer> ids) throws SQLException {
 		contactService.remove(ids);
 	}
 	
