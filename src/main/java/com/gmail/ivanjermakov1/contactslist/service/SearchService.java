@@ -68,8 +68,6 @@ public class SearchService {
 			sql += ") and contact_id = id order by id asc";
 		}
 		
-		System.out.println(sql);
-		
 		Connection connection = databaseConfigurator.getConnection();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
