@@ -12,6 +12,7 @@
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/contacts.css">
+	<link rel="stylesheet" type="text/css" href="css/search.css">
 
 	<!--mustache.js-->
 	<script type="text/javascript"
@@ -21,6 +22,7 @@
 </head>
 
 <body>
+
 <div class="header">
 	<a class="home-link" href="index.html">
 		<div class="layer">
@@ -30,21 +32,52 @@
 	</a>
 	<div class="navigation-bar">
 		<div class="left">
-			<a href="#"><i class="fas fa-plus"></i></a>
-			<a href="#" onclick="edit()"><i class="fas fa-pen"></i></a>
-			<a href="#"><i class="fas fa-trash"></i></a>
+			<a href="/"><i class="fas fa-users"></i></a>
 		</div>
 		<div class="right">
-			<a href="#"><i class="fas fa-envelope"></i></a>
-			<a href="/search.html"><i class="fas fa-search"></i></a>
+			<a href="/"><i class="fas fa-envelope"></i></a>
+			<a href="#"><i class="fas fa-search"></i></a>
 		</div>
 	</div>
 </div>
 
-<div class="content">
+<div class="search">
+	<div class="row">
+		<label>Name:</label><input type="text" id="name">
+		<label>Surname:</label><input type="text" id="surname">
+		<label>Patronymic:</label><input type="text" id="patronymic">
+	</div>
+
+	<div class="row">
+		<label>Birth:</label><input type="date" id="birth">
+		<select id="isBefore">
+			<option selected value>-</option>
+			<option>Before</option>
+			<option>After</option>
+		</select>
+		<label>Sex:</label>
+		<select id="sex">
+			<option selected value>-</option>
+			<option>Male</option>
+			<option>Female</option>
+		</select>
+		<label>Marital status:</label><input type="text" id="maritalStatus">
+	</div>
+
+	<div class="row">
+		<label>Nationality:</label><input type="text" id="nationality">
+		<label>Country:</label><input type="text" id="country">
+		<label>Region:</label><input type="text" id="region">
+		<label>Locality:</label><input type="text" id="locality">
+		<label>Postcode:</label><input type="text" id="postcode">
+	</div>
+
+	<div id="submit" onclick="search()">Submit</div>
+
 	<div id="contacts-wrapper">
 		<!--CONTACTS HERE-->
 	</div>
+
 </div>
 
 <!--TEMPLATES-->
@@ -65,11 +98,9 @@
 
 </script>
 
+<script type="text/javascript" src="js/search.js"></script>
 <script type="text/javascript" src="js/index-template.js"></script>
 
-<script type="text/javascript">
-	load();
-</script>
-
+</div>
 </body>
 </html>

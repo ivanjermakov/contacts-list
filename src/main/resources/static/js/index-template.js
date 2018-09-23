@@ -33,10 +33,15 @@ function getCheckedIds() {
 
 function edit() {
 	var ids = getCheckedIds();
-	if (ids.length === 0) alert("Check any contact and try again.");
-	if (ids.length > 1) alert("Only one contact must be checked");
+
+	if (ids.length === 0) {
+		alert("Check any contact and try again.");
+		return;
+	}
+	if (ids.length > 1) {
+		alert("Only one contact must be checked");
+		return;
+	}
 
 	window.location.replace("/edit-contact.html?id=" + ids[0]);
 }
-
-load();
