@@ -31,11 +31,11 @@ public class SearchService {
 	public Set<Contact> search(Search search) throws SQLException {
 		String sql = "select * from contact, address where (";
 		
-		if (search.getName() != null)
+		if (search.getName() != null && !search.getName().isEmpty())
 			sql += where("name", search.getName()) + " or ";
-		if (search.getSurname() != null)
+		if (search.getSurname() != null && !search.getSurname().isEmpty())
 			sql += where("surname", search.getSurname()) + " or ";
-		if (search.getPatronymic() != null)
+		if (search.getPatronymic() != null && !search.getPatronymic().isEmpty())
 			sql += where("patronymic", search.getPatronymic()) + " or ";
 		if (search.getBirth() != null && search.getBirthAfter() != null) {
 			if (search.getBirthAfter()) {
@@ -47,15 +47,15 @@ public class SearchService {
 		}
 		if (search.getSex() != null)
 			sql += "sex = " + search.getSex() + " or ";
-		if (search.getMaritalStatus() != null)
-			sql += where("martial_status", search.getMaritalStatus()) + " or ";
-		if (search.getNationality() != null)
+		if (search.getMaritalStatus() != null && !search.getMaritalStatus().isEmpty())
+			sql += where("marital_status", search.getMaritalStatus()) + " or ";
+		if (search.getNationality() != null && !search.getNationality().isEmpty())
 			sql += where("nationality", search.getNationality()) + " or ";
-		if (search.getCountry() != null)
+		if (search.getCountry() != null && !search.getCountry().isEmpty())
 			sql += where("country", search.getCountry()) + " or ";
-		if (search.getRegion() != null)
+		if (search.getRegion() != null && !search.getRegion().isEmpty())
 			sql += where("region", search.getRegion()) + " or ";
-		if (search.getLocality() != null)
+		if (search.getLocality() != null && !search.getLocality().isEmpty())
 			sql += where("locality", search.getLocality()) + " or ";
 		if (search.getPostcode() != null)
 			sql += "postcode::varchar like " + quotes("%" + search.getPostcode().toString() + "%") + " or ";
@@ -67,6 +67,8 @@ public class SearchService {
 		} else {
 			sql += ") and contact_id = id order by id asc";
 		}
+		
+		System.out.println(sql);
 		
 		Connection connection = databaseConfigurator.getConnection();
 		PreparedStatement statement = connection.prepareStatement(sql);
