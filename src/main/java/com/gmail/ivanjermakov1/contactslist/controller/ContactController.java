@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -47,6 +48,12 @@ public class ContactController {
 	@GetMapping
 	public Set<Contact> select(@RequestParam("amount") int amount, @RequestParam("offset") int offset) throws SQLException {
 		return contactService.select(amount, offset);
+	}
+	
+	@RequestMapping("contact/remove")
+	@PostMapping
+	public void remove(List<Integer> ids) throws SQLException {
+		contactService.remove(ids);
 	}
 	
 }

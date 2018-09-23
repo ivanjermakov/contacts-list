@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -30,6 +31,12 @@ public class ContactService {
 	
 	public Contact selectById(int id) throws SQLException {
 		return contactRepository.selectById(id);
+	}
+	
+	public void remove(List<Integer> ids) throws SQLException {
+		for (Integer id : ids) {
+			contactRepository.removeById(id);
+		}
 	}
 	
 	public Set<Contact> select(int amount, int offset) throws SQLException {
