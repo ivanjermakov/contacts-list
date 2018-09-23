@@ -15,11 +15,12 @@ public class Contact {
 	private String website;
 	private String email;
 	private String workplace;
+	private Boolean removed;
 	
 	public Contact() {
 	}
 	
-	public Contact(Integer id, String name, String surname, String patronymic, Boolean sex, Date birth, String nationality, String maritalStatus, String website, String email, String workplace) {
+	public Contact(Integer id, String name, String surname, String patronymic, Boolean sex, Date birth, String nationality, String maritalStatus, String website, String email, String workplace, Boolean removed) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -31,6 +32,7 @@ public class Contact {
 		this.website = website;
 		this.email = email;
 		this.workplace = workplace;
+		this.removed = removed;
 	}
 	
 	public Integer getId() {
@@ -119,6 +121,14 @@ public class Contact {
 	
 	public void setWorkplace(String workplace) {
 		this.workplace = workplace;
+	}
+	
+	public Boolean getRemoved() {
+		return removed;
+	}
+	
+	public void setRemoved(Boolean removed) {
+		this.removed = removed;
 	}
 	
 	public boolean valid() {

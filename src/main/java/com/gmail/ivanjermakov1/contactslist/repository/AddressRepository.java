@@ -25,14 +25,15 @@ public class AddressRepository {
 		
 		PreparedStatement statement = connection.prepareStatement(
 				"insert into " +
-						"address(contact_id, country, region, locality, postcode) " +
-						"values (?, ?, ?, ?, ?)"
+						"address(contact_id, country, region, locality, postcode, removed) " +
+						"values (?, ?, ?, ?, ?, ?)"
 		);
 		statement.setInt(1, address.getContactId());
 		statement.setString(2, address.getCountry());
 		statement.setString(3, address.getRegion());
 		statement.setString(4, address.getLocality());
 		statement.setInt(5, address.getPostcode());
+		statement.setBoolean(6, address.getRemoved());
 		
 		statement.execute();
 		
@@ -43,7 +44,7 @@ public class AddressRepository {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
-				"select * from address where contact_id = ?"
+				"select * from address where contact_id = ? and removed = false"
 		);
 		statement.setInt(1, id);
 		
@@ -56,7 +57,8 @@ public class AddressRepository {
 				resultSet.getString("country"),
 				resultSet.getString("region"),
 				resultSet.getString("locality"),
-				resultSet.getInt("postcode")
+				resultSet.getInt("postcode"),
+				resultSet.getBoolean("removed")
 		);
 	}
 	

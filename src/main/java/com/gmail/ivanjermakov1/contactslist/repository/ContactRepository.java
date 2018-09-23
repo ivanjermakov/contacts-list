@@ -26,8 +26,8 @@ public class ContactRepository {
 		
 		PreparedStatement statement = connection.prepareStatement(
 				"insert into " +
-						"contact(name, surname, patronymic, sex, birth, nationality, marital_status, website, email, workplace) " +
-						"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+						"contact(name, surname, patronymic, sex, birth, nationality, marital_status, website, email, workplace, removed) " +
+						"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		);
 		statement.setString(1, contact.getName());
 		statement.setString(2, contact.getSurname());
@@ -43,6 +43,7 @@ public class ContactRepository {
 		statement.setString(8, contact.getWebsite());
 		statement.setString(9, contact.getEmail());
 		statement.setString(10, contact.getWorkplace());
+		statement.setBoolean(11, contact.getRemoved());
 		
 		statement.execute();
 		
@@ -53,7 +54,7 @@ public class ContactRepository {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
-				"select * from contact order by id asc"
+				"select * from contact where removed = false order by id asc"
 		);
 		
 		ResultSet resultSet = statement.executeQuery();
@@ -67,7 +68,7 @@ public class ContactRepository {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
-				"select * from contact where id=? order by id asc"
+				"select * from contact where id = ? and removed = false order by id asc"
 		);
 		statement.setInt(1, id);
 		
@@ -82,7 +83,7 @@ public class ContactRepository {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
-				"select * from contact order by id asc limit ? offset ?"
+				"select * from contact where removed = false order by id asc limit ? offset ?"
 		);
 		statement.setInt(1, amount);
 		statement.setInt(2, offset);
@@ -100,7 +101,7 @@ public class ContactRepository {
 		PreparedStatement statement = connection.prepareStatement(
 				"select id, name, surname, patronymic, birth, locality, workplace\n" +
 						"from contact, address\n" +
-						"where address.contact_id = id\n" +
+						"where address.contact_id = id and removed = false\n" +
 						"order by id asc;"
 		);
 		
@@ -126,7 +127,8 @@ public class ContactRepository {
 					resultSet.getString("marital_status"),
 					resultSet.getString("website"),
 					resultSet.getString("email"),
-					resultSet.getString("workplace")));
+					resultSet.getString("workplace"),
+					resultSet.getBoolean("removed")));
 		}
 		
 		return set;
