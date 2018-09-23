@@ -14,11 +14,13 @@ import java.util.Set;
 @Component
 public class ContactRepository {
 	
+	private final AddressRepository addressRepository;
 	private final DatabaseConfigurator databaseConfigurator;
 	
 	@Autowired
-	public ContactRepository(DatabaseConfigurator databaseConfigurator) {
+	public ContactRepository(DatabaseConfigurator databaseConfigurator, AddressRepository addressRepository) {
 		this.databaseConfigurator = databaseConfigurator;
+		this.addressRepository = addressRepository;
 	}
 	
 	public void insert(Contact contact) throws SQLException {
@@ -77,6 +79,19 @@ public class ContactRepository {
 		connection.close();
 		
 		return set(resultSet).stream().findFirst().get();
+	}
+	
+	public void removeById(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"update contact set removed = true where id = ? and removed = false"
+		);
+		statement.setInt(1, id);
+		
+		connection.close();
+		
+		addressRepository.removeById(id);
 	}
 	
 	public Set<Contact> select(int amount, int offset) throws SQLException {

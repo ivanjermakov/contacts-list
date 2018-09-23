@@ -62,4 +62,15 @@ public class AddressRepository {
 		);
 	}
 	
+	public void removeById(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"update address set removed = true where contact_id = ? and removed = false"
+		);
+		statement.setInt(1, id);
+		
+		connection.close();
+	}
+	
 }
