@@ -101,7 +101,7 @@ public class ContactRepository {
 		PreparedStatement statement = connection.prepareStatement(
 				"select id, name, surname, patronymic, birth, locality, workplace\n" +
 						"from contact, address\n" +
-						"where address.contact_id = id and removed = false\n" +
+						"where address.contact_id = id and contact.removed = false and address.removed = false\n" +
 						"order by id asc;"
 		);
 		
