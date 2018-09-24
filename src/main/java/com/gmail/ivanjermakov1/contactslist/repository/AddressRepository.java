@@ -23,14 +23,13 @@ public class AddressRepository {
 		PreparedStatement statement = connection.prepareStatement(
 				"insert into " +
 						"address(contact_id, country, region, locality, postcode, removed) " +
-						"values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS
+						"values (?, ?, ?, ?, ?, false)", Statement.RETURN_GENERATED_KEYS
 		);
 		statement.setInt(1, address.getContactId());
 		statement.setString(2, address.getCountry());
 		statement.setString(3, address.getRegion());
 		statement.setString(4, address.getLocality());
-		statement.setInt(5, address.getPostcode());
-		statement.setBoolean(6, address.getRemoved());
+		statement.setObject(5, address.getPostcode(), Types.INTEGER);
 		
 		statement.execute();
 		
@@ -55,7 +54,7 @@ public class AddressRepository {
 		statement.setString(1, address.getCountry());
 		statement.setString(2, address.getRegion());
 		statement.setString(3, address.getLocality());
-		statement.setInt(4, address.getPostcode());
+		statement.setObject(4, address.getPostcode(), Types.INTEGER);
 		statement.setInt(5, address.getContactId());
 		
 		statement.execute();

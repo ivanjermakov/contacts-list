@@ -89,6 +89,43 @@ label input {
     color: #20bcb9;
 }
 
+.submit {
+	display: flex;
+	align-items: center;
+
+	padding: 10px;
+
+	justify-content: center;
+
+	flex-wrap: wrap;
+
+	font-weight: bold;
+}
+
+.cancel {
+	margin: 10px 20px;
+	padding: 15px;
+
+	border-radius: 5px;
+
+	background: #dddddd;
+	color: black;
+
+	cursor: pointer;
+}
+
+.apply {
+	margin: 10px 20px;
+	padding: 15px;
+
+	border-radius: 5px;
+
+	background: #407ed1;
+	color: white;
+
+	cursor: pointer;
+}
+
 .phone-numbers-and-attachments-wrapper {
     display: flex;
     flex-wrap: wrap;

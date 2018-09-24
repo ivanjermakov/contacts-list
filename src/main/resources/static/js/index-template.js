@@ -16,6 +16,8 @@ function load() {
 	httpGet("/contactMainInfo/select", function (json) {
 		var contactsMainInfo = JSON.parse(json);
 
+		console.log(contactsMainInfo);
+
 		contactsMainInfo.forEach(function (contactMainInfo) {
 			displayMainInfo(contactMainInfo);
 		})
@@ -68,5 +70,4 @@ function remove() {
 		clearMainInfo();
 		load();
 	});
-
 }

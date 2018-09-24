@@ -49,27 +49,27 @@
 
 		<div class="general">
 			<div class="heading">General</div>
-			<label>Name<span class="required">*</span>:<input type="text" value="{{name}}"></label>
-			<label>Surname<span class="required">*</span>:<input type="text" value="{{surname}}"></label>
-			<label>Patronymic:<input type="text" value="{{patronymic}}"></label>
-			<label>Date of birth:<input type="date" value="{{birth}}"></label>
+			<label>Name<span class="required">*</span>:<input type="text" id="name" value="{{name}}"></label>
+			<label>Surname<span class="required">*</span>:<input type="text" id="surname" value="{{surname}}"></label>
+			<label>Patronymic:<input type="text" id="patronymic" value="{{patronymic}}"></label>
+			<label>Date of birth:<input type="date" id="birth" value="{{birth}}"></label>
 			<label>Sex:
 				<input id="male-radio" type="radio" name="gender" value="male"> Male
 				<input id="female-radio" type="radio" name="gender" value="female"> Female
 			</label>
-			<label>Nationality:<input type="text" value="{{nationality}}"></label>
-			<label>Marital status:<input type="text" value="{{maritalStatus}}"></label>
-			<label>Website:<input type="text" value="{{website}}"></label>
-			<label>Email:<input type="text" value="{{email}}"></label>
-			<label>Workplace:<input type="text" value="{{workplace}}"></label>
+			<label>Nationality:<input type="text" id="nationality" value="{{nationality}}"></label>
+			<label>Marital status:<input type="text" id="maritalStatus" value="{{maritalStatus}}"></label>
+			<label>Website:<input type="text" id="website" value="{{website}}"></label>
+			<label>Email:<input type="text" id="email" value="{{email}}"></label>
+			<label>Workplace:<input type="text" id="workplace" value="{{workplace}}"></label>
 		</div>
 
 		<div class="address">
 			<div class="heading">Address</div>
-			<label>Country:<input type="text" value="{{country}}"></label>
-			<label>Region:<input type="text" value="{{region}}"></label>
-			<label>Locality:<input type="text" value="{{locality}}"></label>
-			<label>Postcode:<input type="text" value="{{postcode}}"></label>
+			<label>Country:<input type="text" id="country" value="{{country}}"></label>
+			<label>Region:<input type="text" id="region" value="{{region}}"></label>
+			<label>Locality:<input type="text" id="locality" value="{{locality}}"></label>
+			<label>Postcode:<input type="text" id="postcode" value="{{postcode}}"></label>
 		</div>
 	</div>
 
@@ -99,6 +99,11 @@
 		</div>
 	</div>
 
+	<div class="submit">
+		<div class="cancel" onclick="window.redirect('/')">Cancel</div>
+		<div class="apply" onclick="save()">Edit</div>
+	</div>
+
 </script>
 
 <script id="phone-number-template" type="text/template">
@@ -106,7 +111,7 @@
 		<input type="checkbox" class="selected">
 		<div class="number-info">
 			<div><span class="pre">phone number:</span>+{{areaCode}}({{operatorCode}}){{number}}</div>
-			<div><span class="pre">type:</span>{{type}}</div>
+			<div class="type"><span class="pre">type:</span></div>
 			<div><span class="pre">comment:</span>{{comment}}</div>
 		</div>
 	</div>

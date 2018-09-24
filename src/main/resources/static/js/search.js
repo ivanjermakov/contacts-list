@@ -32,8 +32,11 @@ function displaySearchResults(searchQuery) {
 	httpPost("/search/", searchQuery, function (json) {
 		var searchResult = JSON.parse(json);
 
-		searchResult.forEach(function (contactMainInfo) {
-			displayMainInfo(contactMainInfo);
+		console.log(searchResult);
+
+		searchResult.forEach(function (contact) {
+			var address = JSON.parse(httpGetSync("/address/select?id=" + contact.id));
+			displayMainInfo(Object.assign(contact, address));
 		})
 	});
 }

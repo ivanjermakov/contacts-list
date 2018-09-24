@@ -19,13 +19,13 @@ public class AddressService {
 	}
 	
 	public Integer insert(Address address) throws InvalidAddressException, SQLException {
-		if (!address.valid()) throw new InvalidAddressException();
+		if (!address.valid()) throw new InvalidAddressException("Invalid address.");
 		
 		return addressRepository.insert(address);
 	}
 	
 	public void edit(Address address) throws InvalidAddressException, SQLException {
-		if (!address.valid()) throw new InvalidAddressException();
+		if (!address.valid()) throw new InvalidAddressException("invalid address.");
 		
 		addressRepository.edit(address);
 	}

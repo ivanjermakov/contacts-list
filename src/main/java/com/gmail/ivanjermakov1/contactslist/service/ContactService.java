@@ -25,7 +25,7 @@ public class ContactService {
 	}
 	
 	public Integer insert(Contact contact) throws InvalidContactException, SQLException {
-		if (!contact.valid()) throw new InvalidContactException();
+		if (!contact.valid()) throw new InvalidContactException("invalid contact.");
 		return contactRepository.insert(contact);
 	}
 	

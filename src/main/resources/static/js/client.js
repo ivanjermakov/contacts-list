@@ -1,8 +1,12 @@
-function httpGet(theUrl, callback) {
+function httpGet(theUrl, callback, error) {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-			callback(xmlHttp.responseText);
+		if (xmlHttp.readyState === 4) {
+			if (xmlHttp.status === 200) {
+				callback(xmlHttp.responseText);
+			} else {
+				error(JSON.parse(xmlHttp.responseText));
+			}
 		}
 	};
 	xmlHttp.open("GET", theUrl, true);
@@ -16,13 +20,15 @@ function httpGetSync(url) {
 	return xmlHttp.responseText;
 }
 
-function httpPost(url, obj, callback) {
-	console.log(obj);
-
+function httpPost(url, obj, callback, error) {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-			callback(xmlHttp.responseText);
+		if (xmlHttp.readyState === 4) {
+			if (xmlHttp.status === 200) {
+				callback(xmlHttp.responseText);
+			} else {
+				error(JSON.parse(xmlHttp.responseText));
+			}
 		}
 	};
 	xmlHttp.open("POST", url, true);
