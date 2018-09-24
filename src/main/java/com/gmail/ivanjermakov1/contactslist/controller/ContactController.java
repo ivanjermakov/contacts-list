@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.controller;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.exception.InvalidContactException;
+import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.contactslist.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,14 @@ public class ContactController {
 	
 	@RequestMapping("contact/insert")
 	@PostMapping
-	public void insert(@RequestBody Contact contact) throws InvalidContactException, SQLException {
-		contactService.insert(contact);
+	public Integer insert(@RequestBody Contact contact) throws InvalidContactException, SQLException {
+		return contactService.insert(contact);
+	}
+	
+	@RequestMapping("contact/edit")
+	@PostMapping
+	public void edit(@RequestBody Contact contact) throws InvalidContactException, SQLException {
+		contactService.edit(contact);
 	}
 	
 	@RequestMapping("contact/selectAll")
@@ -40,7 +47,7 @@ public class ContactController {
 	
 	@RequestMapping("contact/selectById")
 	@GetMapping
-	public Contact selectById(@RequestParam("id") int id) throws SQLException {
+	public Contact selectById(@RequestParam("id") int id) throws SQLException, NoSuchEntityException {
 		return contactService.selectById(id);
 	}
 	

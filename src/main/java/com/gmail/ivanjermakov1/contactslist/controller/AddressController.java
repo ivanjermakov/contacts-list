@@ -26,8 +26,14 @@ public class AddressController {
 	
 	@RequestMapping("address/insert")
 	@PostMapping
-	public void insert(@RequestBody Address address) throws SQLException, InvalidAddressException {
-		addressService.insert(address);
+	public Integer insert(@RequestBody Address address) throws SQLException, InvalidAddressException {
+		return addressService.insert(address);
+	}
+	
+	@RequestMapping("address/edit")
+	@PostMapping
+	public void edit(@RequestBody Address address) throws InvalidAddressException, SQLException {
+		addressService.edit(address);
 	}
 	
 	@RequestMapping("address/select")

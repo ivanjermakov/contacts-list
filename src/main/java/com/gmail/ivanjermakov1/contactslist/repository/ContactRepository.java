@@ -3,6 +3,7 @@ package com.gmail.ivanjermakov1.contactslist.repository;
 import com.gmail.ivanjermakov1.contactslist.config.DatabaseConfigurator;
 import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.entity.ContactMainInfo;
+import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.contactslist.util.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,13 +24,13 @@ public class ContactRepository {
 		this.addressRepository = addressRepository;
 	}
 	
-	public void insert(Contact contact) throws SQLException {
+	public Integer insert(Contact contact) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
 				"insert into " +
 						"contact(name, surname, patronymic, sex, birth, nationality, marital_status, website, email, workplace, removed) " +
-						"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+						"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, false)", Statement.RETURN_GENERATED_KEYS
 		);
 		statement.setString(1, contact.getName());
 		statement.setString(2, contact.getSurname());
@@ -45,7 +46,49 @@ public class ContactRepository {
 		statement.setString(8, contact.getWebsite());
 		statement.setString(9, contact.getEmail());
 		statement.setString(10, contact.getWorkplace());
-		statement.setBoolean(11, contact.getRemoved());
+		
+		statement.execute();
+		
+		connection.close();
+		
+		ResultSet id = statement.getGeneratedKeys();
+		if (id.next()) return id.getInt(1);
+		throw new SQLException("error saving entity.");
+	}
+	
+	public void edit(Contact contact) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"update contact\n" +
+						"set name    = ?,\n" +
+						"    surname = ?,\n" +
+						"    patronymic = ?,\n" +
+						"    sex = ?,\n" +
+						"    birth = ?,\n" +
+						"    nationality = ?,\n" +
+						"    marital_status = ?,\n" +
+						"    website = ?,\n" +
+						"    email = ?,\n" +
+						"    workplace = ?\n" +
+						"where id = ?"
+		);
+		
+		statement.setString(1, contact.getName());
+		statement.setString(2, contact.getSurname());
+		statement.setString(3, contact.getPatronymic());
+		if (contact.getSex() != null) {
+			statement.setBoolean(4, contact.getSex());
+		} else {
+			statement.setNull(4, Types.BOOLEAN);
+		}
+		statement.setDate(5, contact.getBirth());
+		statement.setString(6, contact.getNationality());
+		statement.setString(7, contact.getMaritalStatus());
+		statement.setString(8, contact.getWebsite());
+		statement.setString(9, contact.getEmail());
+		statement.setString(10, contact.getWorkplace());
+		statement.setInt(11, contact.getId());
 		
 		statement.execute();
 		
@@ -66,7 +109,7 @@ public class ContactRepository {
 		return set(resultSet);
 	}
 	
-	public Contact selectById(int id) throws SQLException {
+	public Contact selectById(int id) throws SQLException, NoSuchEntityException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
@@ -78,7 +121,7 @@ public class ContactRepository {
 		
 		connection.close();
 		
-		return set(resultSet).stream().findFirst().get();
+		return set(resultSet).stream().findFirst().orElseThrow(NoSuchEntityException::new);
 	}
 	
 	public void removeById(int id) throws SQLException {
