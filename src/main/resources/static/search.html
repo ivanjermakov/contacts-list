@@ -43,38 +43,41 @@
 	</div>
 </div>
 
-<div class="search">
-	<div class="row">
-		<label>Name:</label><input type="text" id="name">
-		<label>Surname:</label><input type="text" id="surname">
-		<label>Patronymic:</label><input type="text" id="patronymic">
-	</div>
+<div class="content">
 
-	<div class="row">
-		<label>Birth:</label><input type="date" id="birth">
-		<select id="isBefore">
-			<option selected value>-</option>
-			<option>Before</option>
-			<option>After</option>
-		</select>
-		<label>Sex:</label>
-		<select id="sex">
-			<option selected value>-</option>
-			<option>Male</option>
-			<option>Female</option>
-		</select>
-		<label>Marital status:</label><input type="text" id="maritalStatus">
-	</div>
+	<div class="search">
+		<div class="row">
+			<div class="form"><label>Name:</label><input type="text" id="name"></div>
+			<div class="form"><label>Surname:</label><input type="text" id="surname"></div>
+			<div class="form"><label>Patronymic:</label><input type="text" id="patronymic"></div>
+		</div>
 
-	<div class="row">
-		<label>Nationality:</label><input type="text" id="nationality">
-		<label>Country:</label><input type="text" id="country">
-		<label>Region:</label><input type="text" id="region">
-		<label>Locality:</label><input type="text" id="locality">
-		<label>Postcode:</label><input type="text" id="postcode">
-	</div>
+		<div class="row">
+			<div class="form"><label>Birth:</label><input type="date" id="birth">
+				<select id="isBefore">
+					<option selected value>-</option>
+					<option>Before</option>
+					<option>After</option>
+				</select></div>
+			<div class="form"><label>Sex:</label>
+				<select id="sex">
+					<option selected value>-</option>
+					<option>Male</option>
+					<option>Female</option>
+				</select></div>
+			<div class="form"><label>Marital status:</label><input type="text" id="maritalStatus"></div>
+		</div>
 
-	<div id="submit" onclick="search()">Submit</div>
+		<div class="row">
+			<div class="form"><label>Nationality:</label><input type="text" id="nationality"></div>
+			<div class="form"><label>Country:</label><input type="text" id="country"></div>
+			<div class="form"><label>Region:</label><input type="text" id="region"></div>
+			<div class="form"><label>Locality:</label><input type="text" id="locality"></div>
+			<div class="form"><label>Postcode:</label><input type="text" id="postcode"></div>
+		</div>
+
+		<div id="submit" onclick="search()">Submit</div>
+	</div>
 
 	<div id="contacts-wrapper">
 		<!--CONTACTS HERE-->

@@ -2,7 +2,11 @@
 	display: flex;
 	flex-direction: column;
 
+	background: white;
+
 	padding: 10px;
+
+	margin-bottom: 10px;
 }
 
 .row {
@@ -11,27 +15,59 @@
 	flex-wrap: wrap;
 }
 
+.form {
+	display: flex;
+	align-items: center;
+
+	margin: 5px;
+}
+
 .search label {
 	font-size: 24px;
+	margin: 0 10px;
 }
 
 .search select {
 	font-size: 24px;
+	margin: 0 10px;
+
+	height: 38px;
+
+	border: 1px solid silver;
 }
 
 .search input {
 	font-size: 24px;
 	margin: 0 10px;
+
+	border: 1px solid silver;
+
+	width: 300px;
 }
 
 #submit {
 	font-size: 24px;
 
-	padding: 5px;
+	text-align: center;
+
+	padding: 10px;
 
 	color: white;
 	background: #407ed1;
 	border-radius: 2px;
 
 	cursor: pointer;
+
+	transition: background-color 0.2s;
+}
+
+#submit:hover {
+	background: #478be7;
+}
+
+@media screen and (max-width: 1400px) {
+	.row {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }

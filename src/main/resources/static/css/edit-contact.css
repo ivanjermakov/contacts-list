@@ -83,6 +83,7 @@ label input {
 	padding: 5px;
 
 	cursor: pointer;
+	transition: color 0.2s;
 }
 
 .options a:hover {
