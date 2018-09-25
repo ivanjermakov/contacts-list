@@ -3,6 +3,22 @@ function displayMainInfo(contactMainInfo) {
 	var template = document.getElementById("contact-template").innerHTML;
 
 	targetContainer.innerHTML += Mustache.render(template, contactMainInfo);
+
+	//fix empty fields
+	var contacts = document.getElementById("contacts-wrapper").children;
+
+	//coz unable to loop HTMLCollection with foreach in ES5
+	for (var i = 0; i < contacts.length; i++) {
+		var birth = contacts[i].getElementsByClassName("birth")[0];
+		console.log(birth);
+		if (birth && birth.innerText === "") birth.remove();
+		var address = contacts[i].getElementsByClassName("address")[0];
+		console.log(address);
+		if (address && address.innerText === "") address.remove();
+		var workplace = contacts[i].getElementsByClassName("workplace")[0];
+		console.log(workplace);
+		if (workplace && workplace.innerText === "") workplace.remove();
+	}
 }
 
 function clearMainInfo() {

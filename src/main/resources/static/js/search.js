@@ -32,7 +32,14 @@ function displaySearchResults(searchQuery) {
 	httpPost("/search/", searchQuery, function (json) {
 		var searchResult = JSON.parse(json);
 
-		console.log(searchResult);
+		if (searchResult.length === 0) {
+			document.getElementById("nothing-found").style.visibility = 'visible';
+			document.getElementById("nothing-found").style.display = 'block';
+			return;
+		} else {
+			document.getElementById("nothing-found").style.visibility = 'hidden';
+			document.getElementById("nothing-found").style.display = 'none';
+		}
 
 		searchResult.forEach(function (contact) {
 			var address = JSON.parse(httpGetSync("/address/select?id=" + contact.id));

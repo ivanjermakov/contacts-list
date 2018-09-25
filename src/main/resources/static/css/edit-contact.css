@@ -125,6 +125,11 @@ label input {
 	color: white;
 
 	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.apply:hover {
+	background: #4b93f5;
 }
 
 .phone-numbers-and-attachments-wrapper {
