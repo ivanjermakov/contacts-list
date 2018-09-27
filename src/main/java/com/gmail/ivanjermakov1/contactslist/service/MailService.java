@@ -25,7 +25,6 @@ public class MailService {
 	@Value("${mail.smtp.port}")
 	private String port;
 	
-	
 	public void sendMail(Mail mail) {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", auth);

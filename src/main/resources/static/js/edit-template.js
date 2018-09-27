@@ -78,6 +78,7 @@ function displayAttachment(attachment) {
 	targetContainer.innerHTML += (Mustache.render(template, attachment));
 }
 
+// TODO: count numbers and attachments
 function save() {
 	var contact = getContact();
 	var address = getAddress();
@@ -108,7 +109,7 @@ function load() {
 	if (id) {
 		var contact = JSON.parse(httpGetSync("/contact/selectById?id=" + id));
 		var address = JSON.parse(httpGetSync("/address/select?id=" + id));
-		var numbers = JSON.parse(httpGetSync("/number/select?id=" + id));
+		var numbers = JSON.parse(httpGetSync("/number/selectByContactId?id=" + id));
 		var attachments = JSON.parse(httpGetSync("/attachment/select?id=" + id));
 
 		display(contact, address, numbers, attachments);
@@ -118,7 +119,7 @@ function load() {
 
 		targetContainer.innerHTML = Mustache.render(template, Object.create(null));
 
-		document.getElementsByClassName("apply")[0].innerText = "Save";
+		document.getElementsByClassName("apply")[0].innerText = "Create";
 	}
 
 }
