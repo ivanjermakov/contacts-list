@@ -32,31 +32,27 @@
 	</a>
 	<div class="navigation-bar">
 		<div class="left">
-			<a href="/edit-contact.html"><i class="fas fa-plus"></i></a>
-			<a href="#" onclick="edit()"><i class="fas fa-pen"></i></a>
-			<a href="#" onclick="remove()"><i class="fas fa-trash"></i></a>
+			<a href="/"><i class="fas fa-users"></i></a>
 		</div>
 		<div class="right">
-			<a href="#"><i class="fas fa-envelope"></i></a>
+			<a href="/mail.html"><i class="fas fa-envelope"></i></a>
 			<a href="/search.html"><i class="fas fa-search"></i></a>
 		</div>
 	</div>
 </div>
 
 <div class="content">
-	<div class="text">
-		<div class="mail-wrapper">
-			<input type="text" placeholder="To:" id="to">
-			<input type="text" placeholder="Subject:" id="subject">
-			<select id="template">
-				<option selected value>Select template</option>
-				<option value="template1">template 1</option>
-				<option value="template2">template 2</option>
-				<option value="template3">template 3</option>
-			</select>
-			<input type="text" id="text">
-			<div id="send" onclick="send()">Send</div>
-		</div>
+	<div class="mail-wrapper">
+		<input type="text" placeholder="To:" id="to">
+		<input type="text" placeholder="Subject:" id="subject">
+		<select id="template">
+			<option selected value>Select template</option>
+			<option value="template1">template 1</option>
+			<option value="template2">template 2</option>
+			<option value="template3">template 3</option>
+		</select>
+		<input type="text" id="text">
+		<div id="send" onclick="send()">Send</div>
 	</div>
 </div>
 

@@ -48,3 +48,16 @@
 #send:hover {
 	background: #478be7;
 }
+
+#sending {
+	background: #85acde;
+
+	font-size: 24px;
+
+	text-align: center;
+
+	padding: 10px;
+
+	color: white;
+	border-radius: 2px;
+}
