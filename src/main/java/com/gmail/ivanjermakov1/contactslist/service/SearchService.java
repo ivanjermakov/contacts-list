@@ -32,35 +32,35 @@ public class SearchService {
 		String sql = "select * from contact, address where (";
 		
 		if (search.getName() != null && !search.getName().isEmpty())
-			sql += where("name", search.getName()) + " or ";
+			sql += where("name", search.getName()) + " and ";
 		if (search.getSurname() != null && !search.getSurname().isEmpty())
-			sql += where("surname", search.getSurname()) + " or ";
+			sql += where("surname", search.getSurname()) + " and ";
 		if (search.getPatronymic() != null && !search.getPatronymic().isEmpty())
-			sql += where("patronymic", search.getPatronymic()) + " or ";
+			sql += where("patronymic", search.getPatronymic()) + " and ";
 		if (search.getBirth() != null && search.getBirthAfter() != null) {
 			if (search.getBirthAfter()) {
 				sql += "birth > " + quotes(search.getBirth().toString());
 			} else {
 				sql += "birth < " + quotes(search.getBirth().toString());
 			}
-			sql += " or ";
+			sql += " and ";
 		}
 		if (search.getSex() != null)
-			sql += "sex = " + search.getSex() + " or ";
+			sql += "sex = " + search.getSex() + " and ";
 		if (search.getMaritalStatus() != null && !search.getMaritalStatus().isEmpty())
-			sql += where("marital_status", search.getMaritalStatus()) + " or ";
+			sql += where("marital_status", search.getMaritalStatus()) + " and ";
 		if (search.getNationality() != null && !search.getNationality().isEmpty())
-			sql += where("nationality", search.getNationality()) + " or ";
+			sql += where("nationality", search.getNationality()) + " and ";
 		if (search.getCountry() != null && !search.getCountry().isEmpty())
-			sql += where("country", search.getCountry()) + " or ";
+			sql += where("country", search.getCountry()) + " and ";
 		if (search.getRegion() != null && !search.getRegion().isEmpty())
-			sql += where("region", search.getRegion()) + " or ";
+			sql += where("region", search.getRegion()) + " and ";
 		if (search.getLocality() != null && !search.getLocality().isEmpty())
-			sql += where("locality", search.getLocality()) + " or ";
+			sql += where("locality", search.getLocality()) + " and ";
 		if (search.getPostcode() != null)
-			sql += "postcode::varchar like " + quotes("%" + search.getPostcode().toString() + "%") + " or ";
+			sql += "postcode::varchar like " + quotes("%" + search.getPostcode().toString() + "%") + " and ";
 		
-		if (sql.endsWith(" or ")) sql = sql.substring(0, sql.length() - 3);
+		if (sql.endsWith(" and ")) sql = sql.substring(0, sql.length() - 3);
 		if (sql.endsWith("(")) {
 			sql = sql.substring(0, sql.length() - 1);
 			sql += "contact_id = id order by id asc";
