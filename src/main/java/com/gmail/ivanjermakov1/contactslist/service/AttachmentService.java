@@ -28,8 +28,12 @@ public class AttachmentService {
 		attachmentRepository.insert(attachment);
 	}
 	
-	public Set<Attachment> select(int id) throws SQLException {
+	public Attachment select(int id) throws SQLException {
 		return attachmentRepository.select(id);
+	}
+	
+	public Set<Attachment> selectByContactId(int contactId) throws SQLException {
+		return attachmentRepository.selectByContactId(contactId);
 	}
 	
 }

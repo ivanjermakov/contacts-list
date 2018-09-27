@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Attachment {
 	
+	private Integer id;
 	private Integer contactId;
 	private String name;
 	private Date uploaded;
@@ -13,12 +14,17 @@ public class Attachment {
 	public Attachment() {
 	}
 	
-	public Attachment(Integer contactId, String name, Date uploaded, String path, String comment) {
+	public Attachment(Integer id, Integer contactId, String name, Date uploaded, String path, String comment) {
+		this.id = id;
 		this.contactId = contactId;
 		this.name = name;
 		this.uploaded = uploaded;
 		this.path = path;
 		this.comment = comment;
+	}
+	
+	public Integer getId() {
+		return id;
 	}
 	
 	public Integer getContactId() {

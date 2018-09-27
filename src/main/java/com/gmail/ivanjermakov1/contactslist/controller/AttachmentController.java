@@ -40,8 +40,14 @@ public class AttachmentController {
 	
 	@RequestMapping("attachment/select")
 	@GetMapping
-	public Set<Attachment> init(@RequestParam("id") int id) throws SQLException {
+	public Attachment select(@RequestParam("id") int id) throws SQLException {
 		return attachmentService.select(id);
+	}
+	
+	@RequestMapping("attachment/selectByContactId")
+	@GetMapping
+	public Set<Attachment> selectByContactId(@RequestParam("id") int contactId) throws SQLException {
+		return attachmentService.selectByContactId(contactId);
 	}
 	
 	@RequestMapping("attachment/upload")

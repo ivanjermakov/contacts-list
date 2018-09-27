@@ -41,13 +41,13 @@ public class AttachmentRepository {
 		statement.execute();
 	}
 	
-	public Set<Attachment> select(int id) throws SQLException {
+	public Set<Attachment> selectByContactId(int contactId) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
 				"select * from attachment where contact_id = ?"
 		);
-		statement.setInt(1, id);
+		statement.setInt(1, contactId);
 		
 		ResultSet resultSet = statement.executeQuery();
 		
@@ -56,11 +56,27 @@ public class AttachmentRepository {
 		return set(resultSet);
 	}
 	
+	public Attachment select(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from attachment where id = ?"
+		);
+		statement.setInt(1, id);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		connection.close();
+		
+		return set(resultSet).stream().findFirst().get();
+	}
+	
 	private Set<Attachment> set(ResultSet resultSet) throws SQLException {
 		Set<Attachment> set = new LinkedHashSet<>();
 		
 		while (resultSet.next()) {
-			set.add(new Attachment(resultSet.getInt("contact_id"),
+			set.add(new Attachment(resultSet.getInt("id"),
+					resultSet.getInt("contact_id"),
 					resultSet.getString("name"),
 					resultSet.getDate("uploaded"),
 					resultSet.getString("path"),
