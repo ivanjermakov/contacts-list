@@ -24,8 +24,12 @@ public class PhoneNumberService {
 		phoneNumberRepository.insert(phoneNumber);
 	}
 	
-	public Set<PhoneNumber> select(int id) throws SQLException {
+	public PhoneNumber select(int id) throws SQLException {
 		return phoneNumberRepository.select(id);
+	}
+	
+	public Set<PhoneNumber> selectByContactId(int contactId) throws SQLException {
+		return phoneNumberRepository.selectByContactId(contactId);
 	}
 	
 }

@@ -33,8 +33,14 @@ public class PhoneNumberController {
 	
 	@RequestMapping("number/select")
 	@GetMapping
-	public Set<PhoneNumber> select(@RequestParam("id") int id) throws SQLException {
+	public PhoneNumber select(@RequestParam("id") int id) throws SQLException {
 		return phoneNumberService.select(id);
+	}
+	
+	@RequestMapping("number/selectByContactId")
+	@GetMapping
+	public Set<PhoneNumber> selectByContactId(@RequestParam("id") int contactId) throws SQLException {
+		return phoneNumberService.selectByContactId(contactId);
 	}
 	
 }

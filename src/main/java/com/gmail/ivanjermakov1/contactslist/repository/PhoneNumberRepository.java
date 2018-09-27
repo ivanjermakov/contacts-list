@@ -42,13 +42,28 @@ public class PhoneNumberRepository {
 		connection.close();
 	}
 	
-	public Set<PhoneNumber> select(int id) throws SQLException {
+	public PhoneNumber select(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from phone_number where id = ?"
+		);
+		statement.setInt(1, id);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		connection.close();
+		
+		return set(resultSet).stream().findFirst().get();
+	}
+	
+	public Set<PhoneNumber> selectByContactId(int contactId) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
 				"select * from phone_number where contact_id = ?"
 		);
-		statement.setInt(1, id);
+		statement.setInt(1, contactId);
 		
 		ResultSet resultSet = statement.executeQuery();
 		
@@ -61,7 +76,8 @@ public class PhoneNumberRepository {
 		Set<PhoneNumber> set = new LinkedHashSet<>();
 		
 		while (resultSet.next()) {
-			set.add(new PhoneNumber(resultSet.getInt("contact_id"),
+			set.add(new PhoneNumber(resultSet.getInt("id"),
+					resultSet.getInt("contact_id"),
 					resultSet.getInt("area_code"),
 					resultSet.getInt("operator_code"),
 					resultSet.getInt("number"),
