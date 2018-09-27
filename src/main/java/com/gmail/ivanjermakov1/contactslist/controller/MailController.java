@@ -1,6 +1,7 @@
 package com.gmail.ivanjermakov1.contactslist.controller;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Mail;
+import com.gmail.ivanjermakov1.contactslist.exception.InvalidMailException;
 import com.gmail.ivanjermakov1.contactslist.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,8 @@ public class MailController {
 	
 	@RequestMapping("mail/send")
 	@PostMapping
-	public void send(@RequestBody Mail mail) {
+	public void send(@RequestBody Mail mail) throws InvalidMailException {
+		if (!mail.isValid()) throw new InvalidMailException("invalid mail format.");
 		mailService.sendMail(mail);
 	}
 	

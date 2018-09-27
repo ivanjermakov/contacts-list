@@ -41,15 +41,16 @@ public class MailService {
 				});
 		
 		try {
-			Message message = new MimeMessage(session);
+			MimeMessage message = new MimeMessage(session);
 			
 			mail.setFrom(username);
 			
+			message.setHeader("Content-Type", "text/plain; charset=UTF-8");
 			message.setFrom(new InternetAddress(mail.getFrom()));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(mail.getTo()));
-			message.setSubject(mail.getSubject());
-			message.setText(mail.getText());
+			message.setSubject(mail.getSubject(), "UTF-8");
+			message.setText(mail.getText(), "UTF-8");
 			
 			Transport.send(message);
 		} catch (MessagingException e) {

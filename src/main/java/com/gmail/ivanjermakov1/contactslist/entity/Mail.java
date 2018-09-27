@@ -49,4 +49,8 @@ public class Mail {
 		this.text = text;
 	}
 	
+	public boolean isValid() {
+		return to != null;
+	}
+	
 }

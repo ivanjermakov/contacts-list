@@ -10,7 +10,17 @@ function getMail() {
 }
 
 function send() {
+	var sendButton = document.getElementById("send");
 	httpPost("/mail/send", getMail(), function (response) {
-		alert("message sent successfully.");
-	})
+		sendButton.id = "send";
+		sendButton.innerText = "Send";
+		alert("Mail sent successfully")
+	}, function (error) {
+		sendButton.id = "send";
+		sendButton.innerText = "Send";
+		alert("Error sending mail.")
+	});
+	sendButton.id = "sending";
+	sendButton.innerText = "Sending...";
+
 }
