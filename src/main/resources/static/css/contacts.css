@@ -48,10 +48,10 @@
     transform: scale(2);
 }
 
-.contact-content {
+.contact-text {
 	text-align: left;
 }
 
-.contact-content div {
-	margin: 10px 0;
+.contact-text div {
+	margin: 15px 0;
 }

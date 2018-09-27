@@ -1,0 +1,50 @@
+.mail-wrapper {
+	display: flex;
+	flex-direction: column;
+
+	background: white;
+
+	padding: 10px;
+}
+
+.mail-wrapper input {
+	width: 100%;
+	height: 50px;
+
+	margin: 5px 0;
+
+	font-size: 24px;
+}
+
+.mail-wrapper select {
+	width: 100%;
+	height: 50px;
+
+	margin: 10px 0;
+
+	font-size: 24px;
+}
+
+#text {
+	height: 500px;
+}
+
+#send {
+	font-size: 24px;
+
+	text-align: center;
+
+	padding: 10px;
+
+	color: white;
+	background: #407ed1;
+	border-radius: 2px;
+
+	cursor: pointer;
+
+	transition: background-color 0.2s;
+}
+
+#send:hover {
+	background: #478be7;
+}
