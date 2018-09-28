@@ -1,5 +1,6 @@
 package com.gmail.ivanjermakov1.contactslist.service;
 
+import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.entity.Mail;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,14 @@ public class MailService {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public void sendBirthdayMail(Contact contact) {
+		String topic = "Happy Birthday, " + contact.getName() + "!";
+		String text = "Dear " + contact.getName() + " " + contact.getSurname() + "!\n"
+				+ "Our app is sincerely congratulates you with Happy Birthday! \uD83C\uDF81\n" +
+				"Yours, Contacts List.";
+		sendMail(new Mail(null, contact.getEmail(), topic, text));
 	}
 	
 }

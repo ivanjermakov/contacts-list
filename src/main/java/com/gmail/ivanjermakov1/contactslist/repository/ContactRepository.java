@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -172,6 +173,20 @@ public class ContactRepository {
 		connection.close();
 		
 		return mainInfoSet(resultSet);
+	}
+	
+	public Set<Contact> selectWithBirthday(Date current) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from contact where birth = ?"
+		);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		connection.close();
+		
+		return set(resultSet);
 	}
 	
 	public Set<Contact> set(ResultSet resultSet) throws SQLException {

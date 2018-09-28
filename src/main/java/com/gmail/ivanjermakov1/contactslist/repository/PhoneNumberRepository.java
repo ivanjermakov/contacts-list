@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.repository;
 
 import com.gmail.ivanjermakov1.contactslist.config.DatabaseConfigurator;
 import com.gmail.ivanjermakov1.contactslist.entity.PhoneNumber;
+import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +43,7 @@ public class PhoneNumberRepository {
 		connection.close();
 	}
 	
-	public PhoneNumber select(int id) throws SQLException {
+	public PhoneNumber select(int id) throws SQLException, NoSuchEntityException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
@@ -54,7 +55,8 @@ public class PhoneNumberRepository {
 		
 		connection.close();
 		
-		return set(resultSet).stream().findFirst().get();
+		return set(resultSet).stream().findFirst()
+				.orElseThrow(() -> new NoSuchEntityException("no phone number."));
 	}
 	
 	public Set<PhoneNumber> selectByContactId(int contactId) throws SQLException {
