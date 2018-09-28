@@ -1,6 +1,5 @@
 package com.gmail.ivanjermakov1.contactslist.task;
 
-import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.repository.ContactRepository;
 import com.gmail.ivanjermakov1.contactslist.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Set;
 
 @Component
 public class ScheduledTasks {
