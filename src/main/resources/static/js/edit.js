@@ -88,16 +88,16 @@ function save() {
 		contact.id = id;
 		httpPost("/contact/edit", contact, function (response) {
 			address.contactId = id;
-			console.log(address);
+
 			httpPost("/address/edit", address, function (response) {
-				window.location.replace("/edit-contact.html?id=" + address.contactId);
+				window.location.replace("/edit.html?id=" + address.contactId);
 			});
 		});
 	} else {
 		httpPost("/contact/insert", contact, function (response) {
 			address.contactId = response;
 			httpPost("/address/insert", address, function (response) {
-				window.location.replace("/edit-contact.html?id=" + address.contactId);
+				window.location.replace("/edit.html?id=" + address.contactId);
 			});
 		});
 	}
@@ -110,7 +110,7 @@ function load() {
 		var contact = JSON.parse(httpGetSync("/contact/selectById?id=" + id));
 		var address = JSON.parse(httpGetSync("/address/select?id=" + id));
 		var numbers = JSON.parse(httpGetSync("/number/selectByContactId?id=" + id));
-		var attachments = JSON.parse(httpGetSync("/attachment/select?id=" + id));
+		var attachments = JSON.parse(httpGetSync("/attachment/selectByContactId?id=" + id));
 
 		display(contact, address, numbers, attachments);
 	} else {

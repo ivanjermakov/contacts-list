@@ -1,8 +1,6 @@
 function getSearchQuery() {
 	var search = JSON.parse(httpGetSync("/search/init"));
 
-	console.log(search);
-
 	search.name = document.getElementById("name").value;
 	search.surname = document.getElementById("surname").value;
 	search.patronymic = document.getElementById("patronymic").value;

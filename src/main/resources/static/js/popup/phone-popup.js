@@ -16,8 +16,6 @@ function checkedPhoneIndexes() {
 function openPhone() {
 	var indexes = checkedPhoneIndexes();
 
-	console.log(indexes);
-
 	if (indexes.length === 0) {
 		alert("Check any contact and try again.");
 		return;

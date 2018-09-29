@@ -41,6 +41,10 @@ input[type=date] {
     width: 100%;
 }
 
+input[type=checkbox] {
+	transform: scale(2);
+}
+
 .info-wrapper {
     display: flex;
     flex-wrap: wrap;
