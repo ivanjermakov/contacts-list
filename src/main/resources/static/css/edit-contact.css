@@ -1,75 +1,92 @@
 .content {
-    background: white;
+	background: white;
 
-    font-size: 24px;
+	font-size: 24px;
 }
 
 label {
 	display: block;
 
-    margin: 10px;
+	margin: 10px;
 
-    width: 300px;
+	width: 300px;
 }
 
 .required {
-    color: #e4365a;
-    font-weight: bold;
+	color: #e4365a;
+	font-weight: bold;
 }
 
 input[type=text] {
-    margin: 0;
+	margin: 0;
 
-    border: 0.6px solid black;
-    border-radius: 1px;
-    font-size: 24px;
+	border: 1px solid silver;
+	border-radius: 1px;
+	font-size: 24px;
 
-    padding: 2px;
+	padding: 2px;
 
-    width: 100%;
+	width: 100%;
+}
+
+input[type=number] {
+	margin: 0;
+
+	border: 1px solid silver;
+	border-radius: 1px;
+	font-size: 24px;
+
+	padding: 2px;
+
+	width: 100%;
 }
 
 input[type=date] {
-    margin: 0;
+	margin: 0;
 
-    border: 0.6px solid black;
-    border-radius: 1px;
-    font-size: 24px;
+	border: 1px solid silver;
+	border-radius: 1px;
+	font-size: 24px;
 
-    padding: 2px;
+	padding: 2px;
 
-    width: 100%;
+	width: 100%;
 }
 
 input[type=checkbox] {
 	transform: scale(2);
 }
 
+input:focus {
+	outline: none !important;
+	border: 1px solid #20bcb9;
+}
+
 .info-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
 }
 
 .info-wrapper > div {
-    margin: 10px;
+	margin: 10px;
 }
 
 .avatar {
-    margin: 10px;
+	margin: 10px;
 
-    height: 320px;
-    background-color: #f2f2f2;
+	height: 320px;
+	background-color: #f2f2f2;
 }
 
 label input {
-    margin: 0 10px;
+	margin: 0 10px;
 }
 
 .heading-wrapper {
-    display: flex;
+	display: flex;
 	align-items: center;
-    justify-content: space-between;
+	justify-content: space-between;
 	flex-wrap: wrap;
 }
 
@@ -78,8 +95,8 @@ label input {
 }
 
 .options a {
-    color: #6b6b6b;
-    text-decoration: none;
+	color: #6b6b6b;
+	text-decoration: none;
 
 	font-size: 24px;
 	padding: 5px;
@@ -89,7 +106,7 @@ label input {
 }
 
 .options a:hover {
-    color: #20bcb9;
+	color: #20bcb9;
 }
 
 .submit {
@@ -135,58 +152,58 @@ label input {
 }
 
 .phone-numbers-and-attachments-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
 }
 
 .phone-numbers-and-attachments-wrapper > div {
-    margin: 10px;
+	margin: 10px;
 }
 
 .phone-number {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    max-width: 600px;
+	max-width: 600px;
 
-    background-color: #f8f8f8;
+	background-color: #f8f8f8;
 
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 
-    font-size: 24px;
+	font-size: 24px;
 
-    padding: 16px;
-    border-radius: 5px;
+	padding: 16px;
+	border-radius: 5px;
 }
 
 input[type="checkbox" i] {
-    margin: 10px;
+	margin: 10px;
 }
 
 .pre {
-    margin-right: 12px;
-    color: #6b6b6b;
+	margin-right: 12px;
+	color: #6b6b6b;
 }
 
 .phone-number .inline input {
-    margin-left: 38%;
-    transform: scale(2);
+	margin-left: 38%;
+	transform: scale(2);
 }
 
 .attachment {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    max-width: 600px;
+	max-width: 600px;
 
-    background-color: #f8f8f8;
+	background-color: #f8f8f8;
 
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 
-    font-size: 24px;
+	font-size: 24px;
 
-    padding: 16px;
+	padding: 16px;
 
-    border-radius: 5px;
+	border-radius: 5px;
 }
