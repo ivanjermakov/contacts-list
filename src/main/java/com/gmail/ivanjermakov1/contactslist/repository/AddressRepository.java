@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.repository;
 
 import com.gmail.ivanjermakov1.contactslist.config.DatabaseConfigurator;
 import com.gmail.ivanjermakov1.contactslist.entity.Address;
+import com.gmail.ivanjermakov1.contactslist.util.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -79,7 +80,7 @@ public class AddressRepository {
 				resultSet.getString("country"),
 				resultSet.getString("region"),
 				resultSet.getString("locality"),
-				resultSet.getInt("postcode"),
+				DBUtils.nullableInt(resultSet, "postcode"),
 				resultSet.getBoolean("removed")
 		);
 	}
