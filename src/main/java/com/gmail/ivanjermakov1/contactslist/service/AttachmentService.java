@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.service;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Attachment;
 import com.gmail.ivanjermakov1.contactslist.exception.InvalidAttachmentException;
+import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.contactslist.repository.AttachmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class AttachmentService {
 		attachmentRepository.insert(attachment);
 	}
 	
-	public Attachment select(int id) throws SQLException {
+	public Attachment select(int id) throws SQLException, NoSuchEntityException {
 		return attachmentRepository.select(id);
 	}
 	
