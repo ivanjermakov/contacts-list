@@ -18,8 +18,12 @@ public class ContactMainInfoService {
 		this.contactRepository = contactRepository;
 	}
 	
-	public Set<ContactMainInfo> selectMainInfo() throws SQLException {
-		return contactRepository.selectMainInfo();
+	public Set<ContactMainInfo> selectAllMainInfo() throws SQLException {
+		return contactRepository.selectAllMainInfo();
+	}
+	
+	public Set<ContactMainInfo> select(int amount, int offset) throws SQLException {
+		return contactRepository.selectMainInfo(amount, offset);
 	}
 	
 }

@@ -157,7 +157,7 @@ public class ContactRepository {
 		return set(resultSet);
 	}
 	
-	public Set<ContactMainInfo> selectMainInfo() throws SQLException {
+	public Set<ContactMainInfo> selectAllMainInfo() throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
@@ -174,12 +174,34 @@ public class ContactRepository {
 		return mainInfoSet(resultSet);
 	}
 	
+	public Set<ContactMainInfo> selectMainInfo(int amount, int offset) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"select id, name, surname, patronymic, birth, locality, workplace\n" +
+						"from contact, address\n" +
+						"where address.contact_id = id and contact.removed = false and address.removed = false\n" +
+						"order by id asc " +
+						"offset ? limit ?"
+		
+		);
+		statement.setInt(1, offset);
+		statement.setInt(2, amount);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		connection.close();
+		
+		return mainInfoSet(resultSet);
+	}
+	
 	public Set<Contact> selectWithBirthday(Date current) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
 				"select * from contact where birth = ?"
 		);
+		statement.setDate(1, current);
 		
 		ResultSet resultSet = statement.executeQuery();
 		

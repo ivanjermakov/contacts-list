@@ -1,3 +1,10 @@
+var CONTACTS_ON_PAGE = 10;
+
+function addParamToUrl(param, value) {
+	var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?" + param + "=" + value;
+	window.history.pushState({path: url}, '', url);
+}
+
 function displayMainInfo(contactMainInfo) {
 	var targetContainer = document.getElementById("contacts-wrapper");
 	var template = document.getElementById("contact-template").innerHTML;
@@ -10,13 +17,12 @@ function displayMainInfo(contactMainInfo) {
 	//coz unable to loop HTMLCollection with foreach in ES5
 	for (var i = 0; i < contacts.length; i++) {
 		var birth = contacts[i].getElementsByClassName("birth")[0];
-		console.log(birth);
 		if (birth && birth.innerText === "") birth.remove();
+
 		var address = contacts[i].getElementsByClassName("address")[0];
-		console.log(address);
 		if (address && address.innerText === "") address.remove();
+
 		var workplace = contacts[i].getElementsByClassName("workplace")[0];
-		console.log(workplace);
 		if (workplace && workplace.innerText === "") workplace.remove();
 	}
 }
@@ -28,16 +34,52 @@ function clearMainInfo() {
 	}
 }
 
-function load() {
-	httpGet("/contactMainInfo/select", function (json) {
-		var contactsMainInfo = JSON.parse(json);
+function getCurrentPageNumber() {
+	var page = new URL(window.location).searchParams.get("page");
+	if (!page) {
+		// 1st page by default
+		page = 1;
+	}
+	return page;
+}
 
-		console.log(contactsMainInfo);
+function load() {
+	var page = getCurrentPageNumber();
+	// remove if first page
+	if (page == 1) removePrevPageButton();
+	// remove if last page
+	if (JSON.parse(httpGetSync("/contactMainInfo/select?amount=" + CONTACTS_ON_PAGE + "&offset=" + page * CONTACTS_ON_PAGE)).length === 0) removeNextPageButton();
+	var offset = (page - 1) * CONTACTS_ON_PAGE;
+
+	httpGet("/contactMainInfo/select?amount=" + CONTACTS_ON_PAGE + "&offset=" + offset, function (json) {
+		var contactsMainInfo = JSON.parse(json);
 
 		contactsMainInfo.forEach(function (contactMainInfo) {
 			displayMainInfo(contactMainInfo);
-		})
+		});
 	});
+}
+
+function removeNextPageButton() {
+	document.getElementById("next").remove();
+}
+
+function removePrevPageButton() {
+	document.getElementById("prev").remove();
+}
+
+function loadNextPage() {
+	var page = getCurrentPageNumber();
+	page++;
+
+	window.location.replace("/index.html?page=" + page);
+}
+
+function loadPrevPage() {
+	var page = getCurrentPageNumber();
+	page--;
+
+	window.location.replace("/index.html?page=" + page);
 }
 
 function getCheckedIds() {
@@ -68,7 +110,7 @@ function edit() {
 		return;
 	}
 
-	window.location.replace("/edit-contact.html?id=" + ids[0]);
+	window.location.replace("/edit.html?id=" + ids[0]);
 }
 
 function remove() {

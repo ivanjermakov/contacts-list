@@ -11,7 +11,7 @@
 	      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/contacts.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 
 	<!--mustache.js-->
 	<script type="text/javascript"
@@ -31,7 +31,7 @@
 	</a>
 	<div class="navigation-bar">
 		<div class="left">
-			<a href="/edit-contact.html"><i class="fas fa-plus"></i></a>
+			<a href="/edit.html"><i class="fas fa-plus"></i></a>
 			<a href="#" onclick="edit()"><i class="fas fa-pen"></i></a>
 			<a href="#" onclick="remove()"><i class="fas fa-trash"></i></a>
 		</div>
@@ -46,6 +46,11 @@
 	<div id="contacts-wrapper">
 		<!--CONTACTS HERE-->
 	</div>
+	<!--TODO: show 404 page on invalid page parameter-->
+	<div id="page-nav">
+		<div id="prev" onclick="loadPrevPage()"><i class="fas fa-chevron-left"></i></div>
+		<div id="next" onclick="loadNextPage()"><i class="fas fa-chevron-right"></i></div>
+	</div>
 </div>
 
 <!--TEMPLATES-->
@@ -54,7 +59,7 @@
 	<div class="contact" id="{{id}}">
 		<input type="checkbox" class="selected">
 		<div class="contact-text">
-			<div class="name-wrapper"><a class="name" href="edit-contact.html?id={{id}}"><span class="pre"><i
+			<div class="name-wrapper"><a class="name" href="edit.html?id={{id}}"><span class="pre"><i
 					class="fas fa-user"></i></span>
 				{{name}} {{surname}} {{patronymic}}</a>
 			</div>
@@ -66,7 +71,7 @@
 
 </script>
 
-<script type="text/javascript" src="js/index-template.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 
 <script type="text/javascript">
 	load();
