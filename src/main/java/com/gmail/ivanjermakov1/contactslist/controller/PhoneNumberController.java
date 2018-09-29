@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.controller;
 
 import com.gmail.ivanjermakov1.contactslist.entity.PhoneNumber;
 import com.gmail.ivanjermakov1.contactslist.exception.InvalidPhoneNumberException;
+import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.contactslist.service.PhoneNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class PhoneNumberController {
 	
 	@RequestMapping("number/select")
 	@GetMapping
-	public PhoneNumber select(@RequestParam("id") int id) throws SQLException {
+	public PhoneNumber select(@RequestParam("id") int id) throws SQLException, NoSuchEntityException {
 		return phoneNumberService.select(id);
 	}
 	
