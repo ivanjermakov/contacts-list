@@ -1,4 +1,5 @@
 .idea
+/src/main/resources/static/.idea
 .gradle
 gradle
 build
