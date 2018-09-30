@@ -32,6 +32,12 @@ public class PhoneNumberController {
 		phoneNumberService.insert(phoneNumber);
 	}
 	
+	@RequestMapping("number/edit")
+	@PostMapping
+	public void edit(@RequestBody PhoneNumber phoneNumber) throws InvalidPhoneNumberException, SQLException {
+		phoneNumberService.edit(phoneNumber);
+	}
+	
 	@RequestMapping("number/select")
 	@GetMapping
 	public PhoneNumber select(@RequestParam("id") int id) throws SQLException, NoSuchEntityException {
@@ -42,6 +48,12 @@ public class PhoneNumberController {
 	@GetMapping
 	public Set<PhoneNumber> selectByContactId(@RequestParam("id") int contactId) throws SQLException {
 		return phoneNumberService.selectByContactId(contactId);
+	}
+	
+	@RequestMapping("number/remove")
+	@GetMapping
+	public void removeById(@RequestParam("id") int id) throws SQLException {
+		phoneNumberService.removeById(id);
 	}
 	
 }

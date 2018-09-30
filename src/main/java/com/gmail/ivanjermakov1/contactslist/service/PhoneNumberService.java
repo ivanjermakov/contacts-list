@@ -25,6 +25,15 @@ public class PhoneNumberService {
 		phoneNumberRepository.insert(phoneNumber);
 	}
 	
+	public void edit(PhoneNumber phoneNumber) throws SQLException, InvalidPhoneNumberException {
+		if (!phoneNumber.valid()) throw new InvalidPhoneNumberException();
+		phoneNumberRepository.edit(phoneNumber);
+	}
+	
+	public void removeById(int id) throws SQLException {
+		phoneNumberRepository.removeById(id);
+	}
+	
 	public PhoneNumber select(int id) throws SQLException, NoSuchEntityException {
 		return phoneNumberRepository.select(id);
 	}

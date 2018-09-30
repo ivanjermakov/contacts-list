@@ -46,8 +46,8 @@ public class AvatarController {
 	
 	@RequestMapping("avatar/upload")
 	@PostMapping
-	public void upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-		uploadService.upload(multipartFile, AVATAR);
+	public String upload(@RequestBody MultipartFile multipartFile) throws IOException {
+		return uploadService.upload(multipartFile, AVATAR);
 	}
 	
 }

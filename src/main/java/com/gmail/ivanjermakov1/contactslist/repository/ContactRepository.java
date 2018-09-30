@@ -77,11 +77,7 @@ public class ContactRepository {
 		statement.setString(1, contact.getName());
 		statement.setString(2, contact.getSurname());
 		statement.setString(3, contact.getPatronymic());
-		if (contact.getSex() != null) {
-			statement.setBoolean(4, contact.getSex());
-		} else {
-			statement.setNull(4, Types.BOOLEAN);
-		}
+		statement.setObject(4, contact.getSex(), Types.BOOLEAN);
 		statement.setDate(5, contact.getBirth());
 		statement.setString(6, contact.getNationality());
 		statement.setString(7, contact.getMaritalStatus());

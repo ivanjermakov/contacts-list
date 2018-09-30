@@ -55,8 +55,7 @@ public class PhoneNumber {
 		return contactId != null &&
 				areaCode != null &&
 				operatorCode != null &&
-				number != null &&
-				type != null;
+				number != null;
 	}
 	
 }

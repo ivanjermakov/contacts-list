@@ -3,13 +3,11 @@ package com.gmail.ivanjermakov1.contactslist.repository;
 import com.gmail.ivanjermakov1.contactslist.config.DatabaseConfigurator;
 import com.gmail.ivanjermakov1.contactslist.entity.PhoneNumber;
 import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
+import com.gmail.ivanjermakov1.contactslist.util.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -35,8 +33,49 @@ public class PhoneNumberRepository {
 		statement.setInt(2, phoneNumber.getAreaCode());
 		statement.setInt(3, phoneNumber.getOperatorCode());
 		statement.setInt(4, phoneNumber.getNumber());
-		statement.setBoolean(5, phoneNumber.getType());
+		statement.setObject(5, phoneNumber.getType(), Types.BOOLEAN);
 		statement.setString(6, phoneNumber.getComment());
+		
+		statement.execute();
+		
+		connection.close();
+	}
+	
+	public void edit(PhoneNumber phoneNumber) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"update phone_number\n" +
+						"set contact_id = ?,\n" +
+						"area_code = ?,\n" +
+						"operator_code = ?,\n" +
+						"number = ?,\n" +
+						"type = ?,\n" +
+						"comment = ?\n" +
+						"where id = ?"
+		);
+		
+		statement.setInt(1, phoneNumber.getContactId());
+		statement.setInt(2, phoneNumber.getAreaCode());
+		statement.setInt(3, phoneNumber.getOperatorCode());
+		statement.setInt(4, phoneNumber.getNumber());
+		statement.setObject(5, phoneNumber.getType(), Types.BOOLEAN);
+		statement.setString(6, phoneNumber.getComment());
+		statement.setInt(7, phoneNumber.getId());
+		
+		statement.execute();
+		
+		connection.close();
+	}
+	
+	public void removeById(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"delete from phone_number\n" +
+						"where id = ?"
+		);
+		statement.setInt(1, id);
 		
 		statement.execute();
 		
@@ -47,7 +86,7 @@ public class PhoneNumberRepository {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
-				"select * from phone_number where id = ?"
+				"select * from phone_number where id = ? order by id asc"
 		);
 		statement.setInt(1, id);
 		
@@ -83,7 +122,7 @@ public class PhoneNumberRepository {
 					resultSet.getInt("area_code"),
 					resultSet.getInt("operator_code"),
 					resultSet.getInt("number"),
-					resultSet.getBoolean("type"),
+					DBUtils.nullableBoolean(resultSet, "type"),
 					resultSet.getString("comment")
 			));
 		}

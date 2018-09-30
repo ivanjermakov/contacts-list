@@ -35,12 +35,14 @@ public class UploadService {
 		return webResources;
 	}
 	
-	public void upload(MultipartFile multipartFile, Type type) throws IOException {
+	public String upload(MultipartFile multipartFile, Type type) throws IOException {
 		String realPath = uploadPlaceholder + type.path;
 		new File(realPath).mkdirs();
 		
 		File file = new File(realPath + "/" + multipartFile.getOriginalFilename());
 		multipartFile.transferTo(file);
+		
+		return webResources + type.path + multipartFile.getOriginalFilename();
 	}
 	
 }

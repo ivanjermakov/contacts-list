@@ -42,6 +42,31 @@ public class AttachmentRepository {
 		statement.execute();
 	}
 	
+	public void edit(Attachment attachment) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"update attachment\n" +
+						"set contact_id = ?,\n" +
+						"name = ?,\n" +
+						"uploaded = ?,\n" +
+						"path = ?,\n" +
+						"comment = ?\n" +
+						"where id = ?"
+		);
+		
+		statement.setInt(1, attachment.getContactId());
+		statement.setString(2, attachment.getName());
+		statement.setDate(3, attachment.getUploaded());
+		statement.setString(4, attachment.getPath());
+		statement.setString(5, attachment.getComment());
+		statement.setInt(6, attachment.getId());
+		
+		statement.execute();
+		
+		connection.close();
+	}
+	
 	public Set<Attachment> selectByContactId(int contactId) throws SQLException {
 		Connection connection = databaseConfigurator.getConnection();
 		
@@ -61,7 +86,7 @@ public class AttachmentRepository {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
-				"select * from attachment where id = ?"
+				"select * from attachment where id = ? order by id asc"
 		);
 		statement.setInt(1, id);
 		

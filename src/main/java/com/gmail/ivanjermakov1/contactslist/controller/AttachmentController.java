@@ -39,6 +39,12 @@ public class AttachmentController {
 		attachmentService.insert(attachment);
 	}
 	
+	@RequestMapping("attachment/edit")
+	@PostMapping
+	public void edit(@RequestBody Attachment attachment) throws SQLException, InvalidAttachmentException {
+		attachmentService.edit(attachment);
+	}
+	
 	@RequestMapping("attachment/select")
 	@GetMapping
 	public Attachment select(@RequestParam("id") int id) throws SQLException, NoSuchEntityException {
@@ -53,8 +59,8 @@ public class AttachmentController {
 	
 	@RequestMapping("attachment/upload")
 	@PostMapping
-	public void upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-		uploadService.upload(multipartFile, ATTACHMENT);
+	public String upload(@RequestBody MultipartFile multipartFile) throws IOException {
+		return uploadService.upload(multipartFile, ATTACHMENT);
 	}
 	
 }

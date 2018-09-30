@@ -29,6 +29,11 @@ public class AttachmentService {
 		attachmentRepository.insert(attachment);
 	}
 	
+	public void edit(Attachment attachment) throws SQLException, InvalidAttachmentException {
+		if (!attachment.valid()) throw new InvalidAttachmentException();
+		attachmentRepository.edit(attachment);
+	}
+	
 	public Attachment select(int id) throws SQLException, NoSuchEntityException {
 		return attachmentRepository.select(id);
 	}
