@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.controller;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Address;
 import com.gmail.ivanjermakov1.contactslist.exception.InvalidAddressException;
+import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.contactslist.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class AddressController {
 	
 	@RequestMapping("address/select")
 	@GetMapping
-	public Address select(@RequestParam("id") int id) throws SQLException {
+	public Address select(@RequestParam("id") int id) throws SQLException, NoSuchEntityException {
 		return addressService.select(id);
 	}
 	

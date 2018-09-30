@@ -37,9 +37,9 @@ public class AttachmentRepository {
 		statement.setString(4, attachment.getPath());
 		statement.setString(5, attachment.getComment());
 		
-		connection.close();
-		
 		statement.execute();
+		
+		connection.close();
 	}
 	
 	public void edit(Attachment attachment) throws SQLException {
@@ -47,20 +47,14 @@ public class AttachmentRepository {
 		
 		PreparedStatement statement = connection.prepareStatement(
 				"update attachment\n" +
-						"set contact_id = ?,\n" +
-						"name = ?,\n" +
-						"uploaded = ?,\n" +
-						"path = ?,\n" +
+						"set name = ?,\n" +
 						"comment = ?\n" +
 						"where id = ?"
 		);
 		
-		statement.setInt(1, attachment.getContactId());
-		statement.setString(2, attachment.getName());
-		statement.setDate(3, attachment.getUploaded());
-		statement.setString(4, attachment.getPath());
-		statement.setString(5, attachment.getComment());
-		statement.setInt(6, attachment.getId());
+		statement.setString(1, attachment.getName());
+		statement.setString(2, attachment.getComment());
+		statement.setInt(3, attachment.getId());
 		
 		statement.execute();
 		

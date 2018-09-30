@@ -2,17 +2,17 @@ function openPhoneEdit() {
 	var ids = checkedPhonesId();
 
 	if (ids.length === 0) {
-		alert("Check any contact and try again.");
+		alert("Check any phone number and try again.");
 		return;
 	}
 	if (ids.length > 1) {
-		alert("Only one contact must be checked");
+		alert("Only one phone number must be checked");
 		return;
 	}
 
 	var phoneId = ids[0];
 
-	var targetContainer = document.body;
+	var targetContainer = document.getElementById("popup");
 	var template = document.getElementById("phone-popup-template").innerHTML;
 
 	var number = JSON.parse(httpGetSync("/number/select?id=" + phoneId));
@@ -25,7 +25,7 @@ function openPhoneEdit() {
 }
 
 function openPhoneCreate() {
-	var targetContainer = document.body;
+	var targetContainer = document.getElementById("popup");
 	var template = document.getElementById("phone-popup-template").innerHTML;
 
 	targetContainer.innerHTML += Mustache.render(template, Object.create(null));

@@ -52,8 +52,7 @@ public class Attachment {
 	}
 	
 	public boolean valid() {
-		return name != null && !name.isEmpty() &&
-				path != null && !path.isEmpty();
+		return name != null && !name.isEmpty();
 	}
 	
 }

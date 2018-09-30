@@ -57,9 +57,9 @@ public class AttachmentController {
 		return attachmentService.selectByContactId(contactId);
 	}
 	
-	@RequestMapping("attachment/upload")
+	@RequestMapping(value = "attachment/upload")
 	@PostMapping
-	public String upload(@RequestBody MultipartFile multipartFile) throws IOException {
+	public String upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
 		return uploadService.upload(multipartFile, ATTACHMENT);
 	}
 	

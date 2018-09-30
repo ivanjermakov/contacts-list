@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.contactslist.service;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Address;
 import com.gmail.ivanjermakov1.contactslist.exception.InvalidAddressException;
+import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.contactslist.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class AddressService {
 		addressRepository.edit(address);
 	}
 	
-	public Address select(int id) throws SQLException {
+	public Address select(int id) throws SQLException, NoSuchEntityException {
 		return addressRepository.select(id);
 	}
 	

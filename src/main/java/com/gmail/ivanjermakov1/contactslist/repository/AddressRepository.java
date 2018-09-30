@@ -2,7 +2,9 @@ package com.gmail.ivanjermakov1.contactslist.repository;
 
 import com.gmail.ivanjermakov1.contactslist.config.DatabaseConfigurator;
 import com.gmail.ivanjermakov1.contactslist.entity.Address;
+import com.gmail.ivanjermakov1.contactslist.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.contactslist.util.DBUtils;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -63,7 +65,7 @@ public class AddressRepository {
 		connection.close();
 	}
 	
-	public Address select(int id) throws SQLException {
+	public Address select(int id) throws SQLException, NoSuchEntityException {
 		Connection connection = databaseConfigurator.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(
@@ -76,13 +78,17 @@ public class AddressRepository {
 		
 		connection.close();
 		
-		return new Address(resultSet.getInt("contact_id"),
-				resultSet.getString("country"),
-				resultSet.getString("region"),
-				resultSet.getString("locality"),
-				DBUtils.nullableInt(resultSet, "postcode"),
-				resultSet.getBoolean("removed")
-		);
+		try {
+			return new Address(resultSet.getInt("contact_id"),
+					resultSet.getString("country"),
+					resultSet.getString("region"),
+					resultSet.getString("locality"),
+					DBUtils.nullableInt(resultSet, "postcode"),
+					resultSet.getBoolean("removed")
+			);
+		} catch (PSQLException e) {
+			throw new NoSuchEntityException("nothing found.");
+		}
 	}
 	
 	public void removeById(int id) throws SQLException {

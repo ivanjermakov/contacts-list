@@ -1,3 +1,14 @@
+function filePost(url, file) {
+	var formData = new FormData();
+	formData.append("file", file);
+
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("POST", url, false);
+	xmlHttp.send(formData);
+
+	return xmlHttp.responseText;
+}
+
 function httpGet(theUrl, callback, error) {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function () {

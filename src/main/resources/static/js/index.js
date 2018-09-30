@@ -61,11 +61,13 @@ function load() {
 }
 
 function removeNextPageButton() {
-	document.getElementById("next").remove();
+	var next = document.getElementById("next");
+	if (next) next.remove();
 }
 
 function removePrevPageButton() {
-	document.getElementById("prev").remove();
+	var prev = document.getElementById("prev");
+	if (prev) prev.remove();
 }
 
 function loadNextPage() {

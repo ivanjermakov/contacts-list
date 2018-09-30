@@ -4,6 +4,8 @@ var deleteNumbersIds = [];
 
 var editedAttachments = [];
 var newAttachments = [];
+var deleteAttachmentsIds = [];
+var uploadAttachments = [];
 
 function getContact() {
 	var contact = JSON.parse(httpGetSync("/contact/init"));
@@ -100,72 +102,114 @@ function checkedPhonesId() {
 	return ids;
 }
 
+function checkedAttachmentsId() {
+	var attachments = document.getElementsByClassName("attachment");
+
+	var ids = [];
+
+	//coz unable to loop HTMLCollection with foreach in ES5
+	for (var i = 0; i < attachments.length; i++) {
+		if (attachments[i].getElementsByTagName("input")[0].checked) {
+			ids.push(attachments[i].classList[1]);
+		}
+	}
+
+	return ids;
+}
+
 function deleteNumbers() {
 	deleteNumbersIds = checkedPhonesId();
 }
 
-function save() {
+function deleteAttachments() {
+	deleteAttachmentsIds = checkedAttachmentsId();
+}
+
+function saveContact(id) {
 	var contact = getContact();
 	var address = getAddress();
 
+	contact.id = id;
+	httpPost("/contact/edit", contact, function (response) {
+		editedNumbers.forEach(function (number) {
+			number.contactId = id;
+			httpPost("/number/edit", number, function (response) {
+			});
+		});
+
+		newNumbers.forEach(function (number) {
+			number.contactId = id;
+			console.log(number);
+			httpPost("/number/insert", number, function (response) {
+			});
+		});
+
+		editedAttachments.forEach(function (attachment) {
+			attachment.contactId = id;
+			httpPost("/attachment/edit", attachment, function (response) {
+			});
+		});
+
+		for (var i = 0; i < newAttachments.length; i++) {
+			var attachment = newAttachments[i];
+			attachment.contactId = id;
+
+			console.log(uploadAttachments[i]);
+			attachment.path = filePost("/attachment/upload", uploadAttachments[i]);
+
+			console.log(attachment);
+			httpPost("/attachment/insert", attachment, function (response) {
+			});
+		}
+
+		deleteNumbersIds.forEach(function (id) {
+			httpGet("/number/remove?id=" + id, function (response) {
+			});
+		});
+
+		address.contactId = id;
+		httpPost("/address/edit", address, function (response) {
+			window.location.replace("/edit.html?id=" + address.contactId);
+		});
+	});
+}
+
+function createNewContact() {
+	var contact = getContact();
+	var address = getAddress();
+
+	httpPost("/contact/insert", contact, function (response) {
+		newNumbers.forEach(function (number) {
+			number.contactId = response;
+			httpPost("/number/insert", number, function (response) {
+			});
+		});
+
+		for (var i = 0; i < newAttachments.length; i++) {
+			var attachment = newAttachments[i];
+			attachment.contactId = id;
+
+			console.log(uploadAttachments[i]);
+			attachment.path = filePost("/attachment/upload", uploadAttachments[i]);
+
+			console.log(attachment);
+			httpPost("/attachment/insert", attachment, function (response) {
+			});
+		}
+
+		address.contactId = response;
+		httpPost("/address/insert", address, function (response) {
+			window.location.replace("/edit.html?id=" + address.contactId);
+		});
+	});
+}
+
+function save() {
 	var id = new URL(window.location).searchParams.get("id");
 	if (id) {
-		contact.id = id;
-		httpPost("/contact/edit", contact, function (response) {
-			editedNumbers.forEach(function (number) {
-				number.contactId = id;
-				httpPost("/number/edit", number, function (response) {
-				})
-			});
-
-			newNumbers.forEach(function (number) {
-				number.contactId = id;
-				console.log(number);
-				httpPost("/number/insert", number, function (response) {
-				})
-			});
-
-			editedAttachments.forEach(function (attachment) {
-				attachment.contactId = id;
-				httpPost("/attachment/edit", attachment, function (response) {
-				})
-			});
-
-			newAttachments.forEach(function (attachment) {
-				attachment.contactId = id;
-				httpPost("/attachment/insert", attachment, function (response) {
-				})
-			});
-
-			deleteNumbersIds.forEach(function (id) {
-				httpGet("/number/remove?id=" + id, function (response) {
-				});
-			});
-
-			address.contactId = id;
-			httpPost("/address/edit", address, function (response) {
-				window.location.replace("/edit.html?id=" + address.contactId);
-			});
-		});
+		saveContact(id);
 	} else {
-		httpPost("/contact/insert", contact, function (response) {
-			newNumbers.forEach(function (number) {
-				number.contactId = response;
-				httpPost("/number/insert", number, function (response) {
-				})
-			});
-
-			newAttachments.forEach(function (attachment) {
-				attachment.contactId = response;
-				httpPost("/attachment/insert", attachment, function (response) {
-				})
-			});
-
-			address.contactId = response;
-			httpPost("/address/insert", address, function (response) {
-				window.location.replace("/edit.html?id=" + address.contactId);
-			});
-		});
+		createNewContact();
 	}
 }
 
@@ -189,5 +233,3 @@ function load() {
 	}
 
 }
-
-load();

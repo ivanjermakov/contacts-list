@@ -60,7 +60,7 @@ public class SearchService {
 		if (search.getPostcode() != null)
 			sql += "postcode::varchar like " + quotes("%" + search.getPostcode().toString() + "%") + " and ";
 		
-		if (sql.endsWith(" and ")) sql = sql.substring(0, sql.length() - 3);
+		if (sql.endsWith(" and ")) sql = sql.substring(0, sql.length() - 4);
 		if (sql.endsWith("(")) {
 			sql = sql.substring(0, sql.length() - 1);
 			sql += "contact_id = id order by id asc";
