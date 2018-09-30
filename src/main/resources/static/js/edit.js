@@ -1,3 +1,10 @@
+var editedNumbers = [];
+var newNumbers = [];
+var deleteNumbersIds = [];
+
+var editedAttachments = [];
+var newAttachments = [];
+
 function getContact() {
 	var contact = JSON.parse(httpGetSync("/contact/init"));
 
@@ -78,7 +85,25 @@ function displayAttachment(attachment) {
 	targetContainer.innerHTML += (Mustache.render(template, attachment));
 }
 
-// TODO: count numbers and attachments
+function checkedPhonesId() {
+	var numbers = document.getElementsByClassName("phone-number");
+
+	var ids = [];
+
+	//coz unable to loop HTMLCollection with foreach in ES5
+	for (var i = 0; i < numbers.length; i++) {
+		if (numbers[i].getElementsByTagName("input")[0].checked) {
+			ids.push(numbers[i].classList[1]);
+		}
+	}
+
+	return ids;
+}
+
+function deleteNumbers() {
+	deleteNumbersIds = checkedPhonesId();
+}
+
 function save() {
 	var contact = getContact();
 	var address = getAddress();
@@ -87,14 +112,55 @@ function save() {
 	if (id) {
 		contact.id = id;
 		httpPost("/contact/edit", contact, function (response) {
-			address.contactId = id;
+			editedNumbers.forEach(function (number) {
+				number.contactId = id;
+				httpPost("/number/edit", number, function (response) {
+				})
+			});
 
+			newNumbers.forEach(function (number) {
+				number.contactId = id;
+				console.log(number);
+				httpPost("/number/insert", number, function (response) {
+				})
+			});
+
+			editedAttachments.forEach(function (attachment) {
+				attachment.contactId = id;
+				httpPost("/attachment/edit", attachment, function (response) {
+				})
+			});
+
+			newAttachments.forEach(function (attachment) {
+				attachment.contactId = id;
+				httpPost("/attachment/insert", attachment, function (response) {
+				})
+			});
+
+			deleteNumbersIds.forEach(function (id) {
+				httpGet("/number/remove?id=" + id, function (response) {
+				});
+			});
+
+			address.contactId = id;
 			httpPost("/address/edit", address, function (response) {
 				window.location.replace("/edit.html?id=" + address.contactId);
 			});
 		});
 	} else {
 		httpPost("/contact/insert", contact, function (response) {
+			newNumbers.forEach(function (number) {
+				number.contactId = response;
+				httpPost("/number/insert", number, function (response) {
+				})
+			});
+
+			newAttachments.forEach(function (attachment) {
+				attachment.contactId = response;
+				httpPost("/attachment/insert", attachment, function (response) {
+				})
+			});
+
 			address.contactId = response;
 			httpPost("/address/insert", address, function (response) {
 				window.location.replace("/edit.html?id=" + address.contactId);

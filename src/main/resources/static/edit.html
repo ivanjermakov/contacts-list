@@ -12,7 +12,7 @@
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/edit.css">
-	<link rel="stylesheet" type="text/css" href="css/popup/edit-phone.css">
+	<link rel="stylesheet" type="text/css" href="css/popup/phone.css">
 
 	<!--mustache.js-->
 	<script type="text/javascript"
@@ -80,9 +80,9 @@
 			<div class="heading-wrapper">
 				<div class="heading">Phone numbers</div>
 				<div class="options">
-					<a onclick="openPhone()"><i class="fas fa-plus"></i></a>
-					<a onclick="openPhone()"><i class="fas fa-pen"></i></a>
-					<a href="#"><i class="fas fa-trash"></i></a>
+					<a onclick="openPhoneCreate()"><i class="fas fa-plus"></i></a>
+					<a onclick="openPhoneEdit()"><i class="fas fa-pen"></i></a>
+					<a onclick="deleteNumbers()"><i class="fas fa-trash"></i></a>
 				</div>
 			</div>
 			<!--PHONE NUMBERS HERE-->
@@ -92,8 +92,8 @@
 			<div class="heading-wrapper">
 				<div class="heading">Attachments</div>
 				<div class="options">
-					<a onclick="openPhone()"><i class="fas fa-plus"></i></a>
-					<a onclick="openPhone()"><i class="fas fa-pen"></i></a>
+					<a onclick=""><i class="fas fa-plus"></i></a>
+					<a onclick=""><i class="fas fa-pen"></i></a>
 					<a href="#"><i class="fas fa-trash"></i></a>
 				</div>
 			</div>
@@ -131,7 +131,7 @@
 </script>
 
 <script id="phone-popup-template" type="text/template">
-	<div id="edit-phone {{id}}">
+	<div id="edit-phone" class="{{id}}">
 
 		<div class="popup-header">
 			<div class="heading">Edit number</div>
@@ -150,8 +150,8 @@
 				<label>Type:</label>
 				<select id="type">
 					<option selected value>Select type</option>
-					<option id="mobile" value="mobile">Mobile</option>
-					<option id="home" value="home">Home</option>
+					<option value="mobile">Mobile</option>
+					<option value="home">Home</option>
 				</select>
 			</div>
 			<div class="form">
@@ -160,7 +160,7 @@
 			</div>
 			<div class="submit">
 				<div class="cancel" onclick="closePhonePopup()">Cancel</div>
-				<div class="apply" onclick="saveNumber()">Save</div>
+				<div class="apply" onclick="editNumber()">Save</div>
 			</div>
 		</div>
 	</div>

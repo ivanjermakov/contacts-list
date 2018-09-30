@@ -1,77 +1,66 @@
-function checkedPhoneIndexes() {
-	var numbers = document.getElementsByClassName("phone-number");
+function openPhoneEdit() {
+	var ids = checkedPhonesId();
 
-	var ids = [];
-
-	//coz unable to loop HTMLCollection with foreach in ES5
-	for (var i = 0; i < numbers.length; i++) {
-		if (numbers[i].getElementsByTagName("input")[0].checked) {
-			ids.push(numbers[i].classList[1]);
-		}
-	}
-
-	return ids;
-}
-
-function openPhone() {
-	var indexes = checkedPhoneIndexes();
-
-	if (indexes.length === 0) {
+	if (ids.length === 0) {
 		alert("Check any contact and try again.");
 		return;
 	}
-	if (indexes.length > 1) {
+	if (ids.length > 1) {
 		alert("Only one contact must be checked");
 		return;
 	}
 
-	var phoneIndex = indexes[0];
+	var phoneId = ids[0];
 
 	var targetContainer = document.body;
 	var template = document.getElementById("phone-popup-template").innerHTML;
 
-	var contactId = new URL(window.location).searchParams.get("id");
-	if (contactId) {
-		var number = JSON.parse(httpGetSync("/number/select?id=" + phoneIndex));
+	var number = JSON.parse(httpGetSync("/number/select?id=" + phoneId));
 
-		targetContainer.innerHTML += Mustache.render(template, number);
+	targetContainer.innerHTML += Mustache.render(template, number);
 
-		//filling complex forms
-		if (number === true) document.getElementById("mobile").selected = true;
-		if (number === false) document.getElementById("home").selected = false;
-	} else {
-		targetContainer.innerHTML += Mustache.render(template, Object.create(null));
-	}
+	//filling complex forms
+	if (number.type === true) document.getElementById("type").value = "mobile";
+	if (number.type === false) document.getElementById("type").value = "home";
+}
+
+function openPhoneCreate() {
+	var targetContainer = document.body;
+	var template = document.getElementById("phone-popup-template").innerHTML;
+
+	targetContainer.innerHTML += Mustache.render(template, Object.create(null));
+
+	document.getElementsByClassName("apply")[1].innerText = "Create";
 }
 
 function getNumber() {
 	var number = JSON.parse(httpGetSync("/number/init"));
 
+	number.contactId = new URL(window.location).searchParams.get("id");
+
 	number.areaCode = document.getElementById("areaCode").value;
 	number.operatorCode = document.getElementById("operatorCode").value;
 	number.number = document.getElementById("number").value;
-	if (document.getElementById("type").value === "Mobile") number.type = true;
-	if (document.getElementById("type").value === "Home") number.type = false;
+	if (document.getElementById("type").value === "mobile") number.type = true;
+	if (document.getElementById("type").value === "home") number.type = false;
 	number.comment = document.getElementById("comment").value;
 
 	return number;
 }
 
-/*
-function saveNumber() {
+function editNumber() {
 	var number = getNumber();
 
-	var id = new URL(window.location).searchParams.get("id");
-	if (id) {
-		contact.id = id;
-		httpPost("/number/edit", contact, function (response) {
-		});
+	var numberId = document.getElementById("edit-phone").className;
+	if (numberId) {
+		number.id = numberId;
+		editedNumbers[number.id] = number;
 	} else {
-		httpPost("/number/insert", contact, function (response) {
-		});
+		newNumbers.push(number);
 	}
+
+	closePhonePopup();
 }
-*/
 
 function closePhonePopup() {
 	document.getElementById("edit-phone").remove();
