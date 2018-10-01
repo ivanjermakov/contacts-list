@@ -32,9 +32,9 @@ public class AvatarRepository {
 		statement.setInt(1, avatar.getContactId());
 		statement.setString(2, avatar.getPath());
 		
-		connection.close();
-		
 		statement.execute();
+		
+		connection.close();
 	}
 	
 	public Avatar select(int id) throws SQLException, EntityNotFoundException {
@@ -52,6 +52,20 @@ public class AvatarRepository {
 		
 		return new Avatar(resultSet.getInt("contact_id"),
 				resultSet.getString("path"));
+	}
+	
+	public void edit(Avatar avatar) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"update avatar set path = ? where contact_id = ?"
+		);
+		statement.setString(1, avatar.getPath());
+		statement.setInt(2, avatar.getContactId());
+		
+		statement.execute();
+		
+		connection.close();
 	}
 	
 }

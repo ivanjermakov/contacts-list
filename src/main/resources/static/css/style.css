@@ -18,7 +18,7 @@ body {
 .header {
     text-align: center;
 
-    background: url("http://hdqwalls.com/wallpapers/convict-lake-autumn-4k-2k.jpg") fixed;
+    background: url("/img/bg.jpg") fixed;
     background-size: cover;
 }
 

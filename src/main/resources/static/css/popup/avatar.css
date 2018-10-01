@@ -1,0 +1,21 @@
+#edit-avatar {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	border: 1px solid silver;
+	border-radius: 4px;
+
+	font-size: 24px;
+
+	background-color: white;
+
+	z-index: 99;
+}
+
+#edit-avatar input {
+	padding: 5px;
+
+	border: 1px solid silver;
+}

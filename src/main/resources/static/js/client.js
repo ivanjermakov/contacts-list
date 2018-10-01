@@ -1,4 +1,23 @@
-function filePost(url, file) {
+function filePost(url, file, callback, error) {
+	var formData = new FormData();
+	formData.append("file", file);
+
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState === 4) {
+			if (xmlHttp.status === 200) {
+				callback(xmlHttp.responseText);
+			} else {
+				error(JSON.parse(xmlHttp.responseText));
+			}
+		}
+	};
+
+	xmlHttp.open("POST", url, true);
+	xmlHttp.send(formData);
+}
+
+function filePostSync(url, file) {
 	var formData = new FormData();
 	formData.append("file", file);
 

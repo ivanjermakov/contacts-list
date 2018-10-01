@@ -21,7 +21,12 @@ public class AvatarService {
 	
 	public void insert(Avatar avatar) throws InvalidAvatarException, SQLException {
 		if (!avatar.valid()) throw new InvalidAvatarException();
-		avatarRepository.insert(avatar);
+		try {
+			avatarRepository.select(avatar.getContactId());
+			avatarRepository.edit(avatar);
+		} catch (EntityNotFoundException e) {
+			avatarRepository.insert(avatar);
+		}
 	}
 	
 	public Avatar select(int id) throws SQLException, EntityNotFoundException {

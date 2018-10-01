@@ -7,6 +7,8 @@ var newAttachments = [];
 var deleteAttachmentsIds = [];
 var uploadAttachments = [];
 
+var avatar;
+
 function getContact() {
 	var contact = JSON.parse(httpGetSync("/contact/init"));
 
@@ -59,6 +61,9 @@ function display(contact, address, numbers, attachments) {
 		}
 	}
 
+	httpGet("/avatar/select?id=" + contact.id, function (response) {
+		document.getElementsByClassName("avatar")[0].src = JSON.parse(response).path;
+	});
 }
 
 function displayNumber(phoneNumber) {
@@ -155,7 +160,7 @@ function saveContact(id) {
 			attachment.contactId = id;
 
 			console.log(uploadAttachments[i]);
-			attachment.path = filePost("/attachment/upload", uploadAttachments[i]);
+			attachment.path = filePostSync("/attachment/upload", uploadAttachments[i]);
 
 			console.log(attachment);
 			httpPost("/attachment/insert", attachment, function (response) {
@@ -174,8 +179,20 @@ function saveContact(id) {
 
 		address.contactId = id;
 		httpPost("/address/edit", address, function (response) {
-			window.location.replace("/edit.html?id=" + address.contactId);
 		});
+
+		if (avatar) {
+			filePost("/avatar/upload", avatar, function (response) {
+				var a = getAvatar();
+				a.path = response;
+
+				httpPost("/avatar/insert", a, function (response) {
+					window.location.replace("/edit.html?id=" + address.contactId);
+				});
+			});
+		} else {
+			window.location.replace("/edit.html?id=" + address.contactId);
+		}
 	});
 }
 
@@ -195,7 +212,7 @@ function createNewContact() {
 			attachment.contactId = id;
 
 			console.log(uploadAttachments[i]);
-			attachment.path = filePost("/attachment/upload", uploadAttachments[i]);
+			attachment.path = filePostSync("/attachment/upload", uploadAttachments[i]);
 
 			console.log(attachment);
 			httpPost("/attachment/insert", attachment, function (response) {
@@ -204,8 +221,20 @@ function createNewContact() {
 
 		address.contactId = response;
 		httpPost("/address/insert", address, function (response) {
-			window.location.replace("/edit.html?id=" + address.contactId);
 		});
+
+		if (avatar) {
+			filePost("/avatar/upload", avatar, function (response) {
+				var a = getAvatar();
+				a.path = response;
+
+				httpPost("/avatar/insert", a, function (response) {
+					window.location.replace("/edit.html?id=" + address.contactId);
+				});
+			});
+		} else {
+			window.location.replace("/edit.html?id=" + address.contactId);
+		}
 	});
 }
 

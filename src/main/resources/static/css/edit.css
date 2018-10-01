@@ -79,6 +79,10 @@ input:focus {
 	background-color: #f2f2f2;
 }
 
+.avatar:hover {
+	cursor: pointer;
+}
+
 label input {
 	margin: 0 10px;
 }

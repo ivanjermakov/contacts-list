@@ -15,6 +15,7 @@
 
 	<link rel="stylesheet" type="text/css" href="css/popup/popup.css">
 	<link rel="stylesheet" type="text/css" href="css/popup/phone.css">
+	<link rel="stylesheet" type="text/css" href="css/popup/avatar.css">
 	<link rel="stylesheet" type="text/css" href="css/popup/attachment.css">
 
 	<!--mustache.js-->
@@ -24,6 +25,7 @@
 	<script type="text/javascript" src="js/client.js"></script>
 	<script type="text/javascript" src="js/edit.js"></script>
 	<script type="text/javascript" src="js/popup/popup.js"></script>
+	<script type="text/javascript" src="js/popup/avatar-popup.js"></script>
 	<script type="text/javascript" src="js/popup/phone-popup.js"></script>
 	<script type="text/javascript" src="js/popup/attachment-popup.js"></script>
 </head>
@@ -55,7 +57,7 @@
 <script id="contact-template" type="text/template">
 
 	<div class="info-wrapper">
-		<img src="img/default-avatar.png" class="avatar">
+		<img src="img/default-avatar.png" class="avatar" onclick="editAvatarPopup()">
 
 		<div class="general">
 			<div class="heading">General</div>
@@ -178,7 +180,7 @@
 	<div id="edit-attachment" class="{{id}}">
 
 		<div class="popup-header">
-			<div class="heading">Edit number</div>
+			<div class="heading">Edit attachment</div>
 			<a onclick="closeAttachmentPopup()"><i class="fas fa-times"></i></a>
 		</div>
 		<div class="popup-content">
@@ -197,6 +199,26 @@
 			<div class="submit">
 				<div class="cancel" onclick="closeAttachmentPopup()">Cancel</div>
 				<div class="apply" onclick="editAttachment()">Save</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script id="avatar-popup-template" type="text/template">
+	<div id="edit-avatar">
+
+		<div class="popup-header">
+			<div class="heading">Edit avatar</div>
+			<a onclick="closeAvatarPopup()"><i class="fas fa-times"></i></a>
+		</div>
+		<div class="popup-content">
+			<div id="file-form" class="form">
+				<label>Avatar<span class="required">*</span>:</label>
+				<input type="file" id="file">
+			</div>
+			<div class="submit">
+				<div class="cancel" onclick="closeAvatarPopup()">Cancel</div>
+				<div class="apply" onclick="editAvatar()">Save</div>
 			</div>
 		</div>
 	</div>
