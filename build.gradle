@@ -22,4 +22,5 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
 
     compile group: 'javax.mail', name: 'mail', version: '1.5.0-b01'
+    compile group: 'org.antlr', name: 'stringtemplate', version: '3.2.1'
 }

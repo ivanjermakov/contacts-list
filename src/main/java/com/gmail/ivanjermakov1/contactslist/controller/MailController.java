@@ -6,6 +6,8 @@ import com.gmail.ivanjermakov1.contactslist.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 public class MailController {
 	
@@ -27,6 +29,12 @@ public class MailController {
 	public void send(@RequestBody Mail mail) throws InvalidMailException {
 		if (!mail.isValid()) throw new InvalidMailException("invalid mail format.");
 		mailService.sendMail(mail);
+	}
+	
+	@RequestMapping("mail/template/init")
+	@GetMapping
+	public Map<String, String> selectAllTemplates() {
+		return mailService.selectAllTemplates();
 	}
 	
 }

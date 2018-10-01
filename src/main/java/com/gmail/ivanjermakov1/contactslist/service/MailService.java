@@ -2,16 +2,21 @@ package com.gmail.ivanjermakov1.contactslist.service;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.entity.Mail;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 @Service
 public class MailService {
+	
+	private final TemplateService templateService;
 	
 	@Value("${mail.smtp.user}")
 	private String username;
@@ -26,6 +31,11 @@ public class MailService {
 	@Value("${mail.smtp.port}")
 	private String port;
 	
+	@Autowired
+	public MailService(TemplateService templateService) {
+		this.templateService = templateService;
+	}
+	
 	public void sendMail(Mail mail) {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", auth);
@@ -34,7 +44,7 @@ public class MailService {
 		props.put("mail.smtp.port", port);
 		
 		Session session = Session.getInstance(props,
-				new javax.mail.Authenticator() {
+				new Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication(username, password);
 					}
@@ -64,6 +74,11 @@ public class MailService {
 				+ "Our app is sincerely congratulates you with Happy Birthday! \uD83C\uDF81\n" +
 				"Yours, Contacts List.";
 		sendMail(new Mail(null, contact.getEmail(), topic, text));
+	}
+	
+	public Map<String, String> selectAllTemplates() {
+		return templateService.selectAll().entrySet().stream()
+				.collect(Collectors.toMap(Map.Entry::getKey, v -> v.getValue().toString()));
 	}
 	
 }
