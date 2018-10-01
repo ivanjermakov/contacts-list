@@ -18,6 +18,7 @@ function openPhoneEdit() {
 	var number = JSON.parse(httpGetSync("/number/select?id=" + phoneId));
 
 	targetContainer.innerHTML += Mustache.render(template, number);
+	dimBackground();
 
 	//filling complex forms
 	if (number.type === true) document.getElementById("type").value = "mobile";
@@ -29,6 +30,7 @@ function openPhoneCreate() {
 	var template = document.getElementById("phone-popup-template").innerHTML;
 
 	targetContainer.innerHTML += Mustache.render(template, Object.create(null));
+	dimBackground();
 
 	document.getElementsByClassName("apply")[1].innerText = "Create";
 }
@@ -57,6 +59,7 @@ function editNumber() {
 		editedNumbers[number.id] = number;
 	} else {
 		newNumbers.push(number);
+		displayNumber(number);
 	}
 
 	closePhonePopup();
@@ -64,4 +67,5 @@ function editNumber() {
 
 function closePhonePopup() {
 	document.getElementById("edit-phone").remove();
+	clearBackground();
 }

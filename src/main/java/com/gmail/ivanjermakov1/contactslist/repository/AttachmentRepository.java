@@ -92,6 +92,20 @@ public class AttachmentRepository {
 				.orElseThrow(() -> new NoSuchEntityException("no phone number."));
 	}
 	
+	public void removeById(int id) throws SQLException {
+		Connection connection = databaseConfigurator.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(
+				"delete from attachment\n" +
+						"where id = ?"
+		);
+		statement.setInt(1, id);
+		
+		statement.execute();
+		
+		connection.close();
+	}
+	
 	private Set<Attachment> set(ResultSet resultSet) throws SQLException {
 		Set<Attachment> set = new LinkedHashSet<>();
 		

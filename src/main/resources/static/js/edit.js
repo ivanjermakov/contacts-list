@@ -167,6 +167,11 @@ function saveContact(id) {
 			});
 		});
 
+		deleteAttachmentsIds.forEach(function (id) {
+			httpGet("/attachment/remove?id=" + id, function (response) {
+			});
+		});
+
 		address.contactId = id;
 		httpPost("/address/edit", address, function (response) {
 			window.location.replace("/edit.html?id=" + address.contactId);

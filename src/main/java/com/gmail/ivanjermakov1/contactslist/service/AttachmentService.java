@@ -42,4 +42,8 @@ public class AttachmentService {
 		return attachmentRepository.selectByContactId(contactId);
 	}
 	
+	public void removeById(int id) throws SQLException {
+		attachmentRepository.removeById(id);
+	}
+	
 }

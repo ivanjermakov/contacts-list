@@ -18,6 +18,7 @@ function openAttachmentEdit() {
 	var attachment = JSON.parse(httpGetSync("/attachment/select?id=" + phoneId));
 
 	targetContainer.innerHTML += Mustache.render(template, attachment);
+	dimBackground();
 
 	document.getElementById("file-form").remove();
 }
@@ -27,6 +28,7 @@ function openAttachmentCreate() {
 	var template = document.getElementById("attachment-popup-template").innerHTML;
 
 	targetContainer.innerHTML += Mustache.render(template, Object.create(null));
+	dimBackground();
 
 	document.getElementsByClassName("apply")[1].innerText = "Create";
 }
@@ -52,6 +54,7 @@ function editAttachment() {
 	} else {
 		newAttachments.push(attachment);
 		uploadAttachments.push(document.getElementById("file").files[0]);
+		displayAttachment(attachment);
 	}
 
 	closeAttachmentPopup();
@@ -59,4 +62,5 @@ function editAttachment() {
 
 function closeAttachmentPopup() {
 	document.getElementById("edit-attachment").remove();
+	clearBackground();
 }

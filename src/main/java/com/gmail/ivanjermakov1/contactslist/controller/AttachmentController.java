@@ -57,6 +57,12 @@ public class AttachmentController {
 		return attachmentService.selectByContactId(contactId);
 	}
 	
+	@RequestMapping("attachment/remove")
+	@GetMapping
+	public void removeById(@RequestParam("id") int id) throws SQLException {
+		attachmentService.removeById(id);
+	}
+	
 	@RequestMapping(value = "attachment/upload")
 	@PostMapping
 	public String upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
