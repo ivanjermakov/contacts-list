@@ -74,6 +74,8 @@ public class MailService {
 	}
 	
 	public void sendBirthdayMail(Contact contact) {
+		logger.info("congratulate with birthday: @" + contact.getId());
+		
 		String topic = "Happy Birthday, " + contact.getName() + "!";
 		String text = "Dear " + contact.getName() + " " + contact.getSurname() + "!\n"
 				+ "Our app is sincerely congratulates you with Happy Birthday! \uD83C\uDF81\n" +
