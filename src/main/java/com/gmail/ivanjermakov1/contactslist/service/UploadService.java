@@ -1,5 +1,7 @@
 package com.gmail.ivanjermakov1.contactslist.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,8 @@ public class UploadService {
 		}
 	}
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Value("${upload.placeholder}")
 	private String uploadPlaceholder;
 	
@@ -36,6 +40,8 @@ public class UploadService {
 	}
 	
 	public String upload(MultipartFile multipartFile, Type type) throws IOException {
+		logger.info("upload file: name: " + multipartFile.getOriginalFilename() + " size: " + multipartFile.getSize());
+		
 		String realPath = uploadPlaceholder + type.path;
 		new File(realPath).mkdirs();
 		

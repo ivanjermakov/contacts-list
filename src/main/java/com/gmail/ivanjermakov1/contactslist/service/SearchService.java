@@ -4,6 +4,8 @@ import com.gmail.ivanjermakov1.contactslist.config.DatabaseConfigurator;
 import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.entity.Search;
 import com.gmail.ivanjermakov1.contactslist.repository.ContactRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import static com.gmail.ivanjermakov1.contactslist.util.DBUtils.where;
 @Service
 public class SearchService {
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private final DatabaseConfigurator databaseConfigurator;
 	private final ContactRepository contactRepository;
 	
@@ -67,6 +70,8 @@ public class SearchService {
 		} else {
 			sql += ") and contact_id = id order by id asc";
 		}
+		
+		logger.info("search contact by sql: " + sql);
 		
 		Connection connection = databaseConfigurator.getConnection();
 		PreparedStatement statement = connection.prepareStatement(sql);

@@ -1,6 +1,8 @@
 package com.gmail.ivanjermakov1.contactslist.service;
 
 import org.antlr.stringtemplate.StringTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -10,14 +12,18 @@ import java.util.Map;
 @Service
 public class TemplateService {
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private Map<String, StringTemplate> templateMap;
 	
 	public Map<String, StringTemplate> selectAll() {
+		logger.info("select all templates");
 		return templateMap;
 	}
 	
 	@PostConstruct
 	private void init() {
+		logger.info("initialize templates");
+		
 		templateMap = new LinkedHashMap<>();
 		
 		templateMap.put("Автоответчик",

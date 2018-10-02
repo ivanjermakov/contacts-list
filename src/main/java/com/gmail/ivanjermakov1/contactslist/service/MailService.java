@@ -2,6 +2,8 @@ package com.gmail.ivanjermakov1.contactslist.service;
 
 import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.entity.Mail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class MailService {
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private final TemplateService templateService;
 	
 	@Value("${mail.smtp.user}")
@@ -37,6 +40,7 @@ public class MailService {
 	}
 	
 	public void sendMail(Mail mail) {
+		logger.info("send mail: to: " + mail.getFrom());
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", auth);
 		props.put("mail.smtp.starttls.enable", starttls);
@@ -64,6 +68,7 @@ public class MailService {
 			
 			Transport.send(message);
 		} catch (MessagingException e) {
+			logger.error("error sending mail: to: " + mail.getFrom());
 			throw new RuntimeException(e);
 		}
 	}
