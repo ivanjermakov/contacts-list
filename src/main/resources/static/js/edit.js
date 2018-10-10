@@ -209,7 +209,7 @@ function createNewContact() {
 
 		for (var i = 0; i < newAttachments.length; i++) {
 			var attachment = newAttachments[i];
-			attachment.contactId = id;
+			attachment.contactId = response;
 
 			console.log(uploadAttachments[i]);
 			attachment.path = filePostSync("/attachment/upload", uploadAttachments[i]);

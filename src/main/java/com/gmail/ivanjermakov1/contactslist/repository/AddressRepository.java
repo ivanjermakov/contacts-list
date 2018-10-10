@@ -15,7 +15,6 @@ import java.sql.*;
 @Component
 public class AddressRepository {
 	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private final DatabaseConfigurator databaseConfigurator;
 	
 	@Autowired

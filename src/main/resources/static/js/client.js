@@ -67,13 +67,3 @@ function httpPost(url, obj, callback, error) {
 
 	xmlHttp.send(JSON.stringify(obj));
 }
-
-function httpPostSync(url, obj) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("POST", url, false);
-
-	xmlHttp.setRequestHeader("Content-Type", "application/json");
-
-	xmlHttp.send(obj);
-	return xmlHttp.responseText;
-}
