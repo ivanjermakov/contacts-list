@@ -47,17 +47,24 @@ function getAttachment() {
 function editAttachment() {
 	var attachment = getAttachment();
 
-	var numberId = document.getElementById("edit-attachment").className;
-	if (numberId) {
-		attachment.id = numberId;
+	var attachmentId = document.getElementById("edit-attachment").className;
+	if (attachmentId) {
+		attachment.id = attachmentId;
 		editedAttachments[attachment.id] = attachment;
+
+		// show edited attachment on edit page
+		deleteAttachment(attachmentId);
 	} else {
 		newAttachments.push(attachment);
 		uploadAttachments.push(document.getElementById("file").files[0]);
-		displayAttachment(attachment);
 	}
 
+	displayAttachment(attachment);
 	closeAttachmentPopup();
+}
+
+function deleteAttachment(id) {
+	document.getElementsByClassName("attachment " + id)[0].remove();
 }
 
 function closeAttachmentPopup() {

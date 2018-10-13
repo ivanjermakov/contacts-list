@@ -57,12 +57,19 @@ function editNumber() {
 	if (numberId) {
 		number.id = numberId;
 		editedNumbers[number.id] = number;
+
+		// show edited attachment on edit page
+		deleteNumber(numberId);
 	} else {
 		newNumbers.push(number);
-		displayNumber(number);
 	}
 
+	displayNumber(number);
 	closePhonePopup();
+}
+
+function deleteNumber(id) {
+	document.getElementsByClassName("phone-number " + id)[0].remove();
 }
 
 function closePhonePopup() {

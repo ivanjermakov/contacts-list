@@ -81,7 +81,6 @@ public class AttachmentController {
 		return uploadService.upload(multipartFile, ATTACHMENT);
 	}
 	
-	
 	@RequestMapping(value = "attachment/download")
 	public ResponseEntity<Resource> download(@RequestParam("id") int id) throws SQLException, NoSuchEntityException, IOException {
 		File file = downloadService.download(id);
