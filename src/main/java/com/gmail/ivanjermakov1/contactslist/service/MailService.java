@@ -59,7 +59,7 @@ public class MailService {
 			
 			mail.setFrom(username);
 			
-			message.setHeader("Content-Type", "text/plain; charset=UTF-8");
+			message.setHeader("Content-Type", "text.txt/plain; charset=UTF-8");
 			message.setFrom(new InternetAddress(mail.getFrom()));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(mail.getTo()));

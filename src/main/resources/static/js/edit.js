@@ -238,6 +238,13 @@ function createNewContact() {
 	});
 }
 
+function downloadAttachment(id) {
+	httpGet("/attachment/download?id=" + id, function (response) {
+		window.open("/attachment/download?id=" + id);
+		window.close();
+	})
+}
+
 function save() {
 	var id = new URL(window.location).searchParams.get("id");
 	if (id) {

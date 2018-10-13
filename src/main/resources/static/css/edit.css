@@ -211,3 +211,9 @@ input[type="checkbox" i] {
 
 	border-radius: 5px;
 }
+
+
+.download:hover {
+	cursor: pointer;
+	color: #20bcb9;
+}

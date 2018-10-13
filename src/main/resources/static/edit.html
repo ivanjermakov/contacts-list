@@ -133,7 +133,7 @@
 	<div class="attachment {{id}}">
 		<input type="checkbox">
 		<div class="number-info">
-			<div><span class="pre">file name:</span>{{name}}</div>
+			<div class="download" onclick="downloadAttachment(this.parentElement.parentElement.classList[1])"><span class="pre">file name:</span>{{name}}</div>
 			<div><span class="pre">upload date:</span>{{uploaded}}</div>
 			<div><span class="pre">comment:</span>{{comment}}</div>
 		</div>
