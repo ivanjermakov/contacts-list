@@ -1,5 +1,3 @@
-var templates;
-
 function getMail() {
 	var mail = JSON.parse(httpGetSync("/mail/init"));
 
@@ -24,21 +22,6 @@ function send() {
 	});
 	sendButton.id = "sending";
 	sendButton.innerText = "Sending...";
-}
-
-function load() {
-	templates = JSON.parse(httpGetSync("/mail/template/init"));
-
-	Object.keys(templates).forEach(function (templateName) {
-		addTemplateOption(templateName);
-	});
-}
-
-function addTemplateOption(templateName) {
-	var opt = document.createElement('option');
-	opt.value = templateName;
-	opt.innerHTML = templateName;
-	document.getElementById("template").appendChild(opt);
 }
 
 function selectTemplate() {

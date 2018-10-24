@@ -1,3 +1,7 @@
+.content {
+	background: transparent !important;
+}
+
 #contacts-wrapper {
 	display: block;
 

@@ -4,22 +4,18 @@ import com.gmail.ivanjermakov1.contactslist.entity.Contact;
 import com.gmail.ivanjermakov1.contactslist.entity.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Map;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 @Service
 public class MailService {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	private final TemplateService templateService;
 	
 	@Value("${mail.smtp.user}")
 	private String username;
@@ -34,13 +30,8 @@ public class MailService {
 	@Value("${mail.smtp.port}")
 	private String port;
 	
-	@Autowired
-	public MailService(TemplateService templateService) {
-		this.templateService = templateService;
-	}
-	
 	public void sendMail(Mail mail) {
-		logger.info("send mail: to: " + mail.getFrom());
+		logger.info("send mail: to: " + mail.getTo());
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", auth);
 		props.put("mail.smtp.starttls.enable", starttls);
@@ -81,11 +72,6 @@ public class MailService {
 				+ "Our app is sincerely congratulates you with Happy Birthday! \uD83C\uDF81\n" +
 				"Yours, Contacts List.";
 		sendMail(new Mail(null, contact.getEmail(), topic, text));
-	}
-	
-	public Map<String, String> selectAllTemplates() {
-		return templateService.selectAll().entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getKey, v -> v.getValue().toString()));
 	}
 	
 }

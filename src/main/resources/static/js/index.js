@@ -1,10 +1,5 @@
 var CONTACTS_ON_PAGE = 10;
 
-function addParamToUrl(param, value) {
-	var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?" + param + "=" + value;
-	window.history.pushState({path: url}, '', url);
-}
-
 function displayMainInfo(contactMainInfo) {
 	var targetContainer = document.getElementById("contacts-wrapper");
 	var template = document.getElementById("contact-template").innerHTML;
