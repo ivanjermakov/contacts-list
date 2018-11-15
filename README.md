@@ -1,4 +1,4 @@
-#Contacts List
+# Contacts List
 Implementation of individual task for iTechArt Java course
 
 ##Requirements
@@ -6,7 +6,7 @@ Implementation of individual task for iTechArt Java course
     Gradle 4.10.2 or higher
     PostgreSQL 11 or higher
     
-##Setup
+## Setup
 1. `git clone https://github.com/ivanjermakov/contacts-list.git`
 2. `gradle build`
 3. Execute `database.sql` on previously created PSQL database.
@@ -17,7 +17,7 @@ Implementation of individual task for iTechArt Java course
         mail.smtp.user=
         mail.smtp.password=
 
-##Run
+## Run
 Web application will start on `:8080` port.
     
     gradle bootRun
