@@ -1,7 +1,7 @@
 # Contacts List
 Implementation of individual task for iTechArt Java course
 
-##Requirements
+## Requirements
     JDK 8 or higher
     Gradle 4.10.2 or higher
     PostgreSQL 11 or higher
